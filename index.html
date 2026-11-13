@@ -1,1 +1,647 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#101820" />
+<title>أذكار قمرية — Qamari Adhkar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
+<style>
+/* ============ BASE ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#F5F6F2;
+  --bg-2:#E9EDE7;
+  --glass:rgba(255,255,255,0.55);
+  --glass-strong:rgba(255,255,255,0.80);
+  --accent:#829D87;
+  --accent-soft:rgba(130,157,135,0.15);
+  --text:#26332D;
+  --text-2:#87918A;
+  --border:rgba(255,255,255,0.75);
+  --moon:#E9EDE7;
+  --blur:18px;
+  --radius:22px;
+  --radius-sm:14px;
+  --radius-lg:28px;
+  --shadow:0 8px 32px rgba(38,51,45,0.06);
+  --shadow-lg:0 12px 40px rgba(38,51,45,0.10);
+  --font:'IBM Plex Sans Arabic',system-ui,-apple-system,sans-serif;
+  --t:0.25s cubic-bezier(0.4,0,0.2,1);
+}
+
+[data-theme="dark"]{
+  --bg:#101820;
+  --bg-2:#0B1016;
+  --glass:rgba(255,255,255,0.08);
+  --glass-strong:rgba(255,255,255,0.14);
+  --accent:#A1B9A3;
+  --accent-soft:rgba(161,185,163,0.15);
+  --text:#E9EEF0;
+  --text-2:#A0ADB5;
+  --border:rgba(255,255,255,0.13);
+  --moon:#DCE5E8;
+  --shadow:0 8px 32px rgba(0,0,0,0.30);
+  --shadow-lg:0 12px 40px rgba(0,0,0,0.45);
+}
+
+html,body{height:100%}
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  transition:background var(--t),color var(--t);
+  overflow-x:hidden;
+  padding-bottom:110px;
+}
+h1,h2,h3,h4{font-weight:600;line-height:1.3;letter-spacing:-0.01em}
+h1{font-size:1.6rem}
+h2{font-size:1.25rem}
+h3{font-size:1.05rem}
+p{color:var(--text-2)}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--accent-soft);color:var(--text)}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-thumb{background:var(--accent-soft);border-radius:3px}
+
+/* ============ MOON BG ============ */
+.moon-bg{
+  position:fixed;inset:0;z-index:-1;overflow:hidden;
+  background:
+    radial-gradient(ellipse at 50% -10%,var(--moon) 0%,transparent 55%),
+    linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%);
+  pointer-events:none;
+  transition:background var(--t);
+}
+.moon-glow{position:absolute;border-radius:50%;filter:blur(80px);opacity:.55;animation:float 18s ease-in-out infinite}
+.moon-glow--1{width:340px;height:340px;top:-120px;right:-80px;background:radial-gradient(circle,rgba(200,215,205,.65),transparent 70%)}
+.moon-glow--2{width:260px;height:260px;bottom:10%;left:-100px;background:radial-gradient(circle,rgba(161,185,163,.35),transparent 70%);animation-delay:-6s}
+.moon-glow--3{width:200px;height:200px;top:40%;left:40%;background:radial-gradient(circle,rgba(220,229,232,.25),transparent 70%);animation-delay:-12s}
+.crescent{
+  position:absolute;top:60px;left:32px;width:60px;height:60px;border-radius:50%;
+  box-shadow:inset 14px -6px 0 0 var(--moon);
+  opacity:.35;filter:drop-shadow(0 0 20px var(--moon));
+  transform:rotate(-15deg);
+}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(20px,-30px) scale(1.05)}}
+
+/* ============ GLASS ============ */
+.glass{
+  background:var(--glass);
+  backdrop-filter:blur(var(--blur)) saturate(160%);
+  -webkit-backdrop-filter:blur(var(--blur)) saturate(160%);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  transition:background var(--t),border-color var(--t),box-shadow var(--t);
+}
+@supports not (backdrop-filter:blur(1px)){
+  .glass{background:var(--glass-strong)}
+}
+
+/* ============ LAYOUT ============ */
+.view{
+  max-width:520px;margin:0 auto;
+  padding:24px 18px 20px;
+  animation:fadeIn .35s ease;
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ============ HEADER ============ */
+.app-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:22px;
+}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-logo{
+  width:42px;height:42px;border-radius:14px;
+  background:linear-gradient(135deg,var(--accent),var(--moon));
+  display:grid;place-items:center;
+  font-size:1.3rem;
+  box-shadow:0 6px 20px var(--accent-soft);
+  position:relative;overflow:hidden;
+}
+.brand-logo::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.55),transparent 60%);
+}
+.brand-logo span{position:relative;z-index:1;color:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.25))}
+.brand-name{display:flex;flex-direction:column;line-height:1.1}
+.brand-name strong{font-size:1.05rem;font-weight:700}
+.brand-name small{font-size:.72rem;color:var(--text-2);letter-spacing:.03em}
+.icon-btn{
+  width:42px;height:42px;border-radius:14px;
+  display:grid;place-items:center;
+  background:var(--glass);
+  border:1px solid var(--border);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  transition:transform var(--t);
+}
+.icon-btn:active{transform:scale(.92)}
+.icon-btn svg{width:20px;height:20px;stroke:var(--text);stroke-width:1.8}
+
+/* ============ GREETING ============ */
+.greeting{margin-bottom:22px}
+.greeting h1{margin-bottom:4px}
+.greeting .sub{font-size:.88rem;color:var(--text-2)}
+.greeting .dates{font-size:.78rem;color:var(--text-2);margin-top:6px;opacity:.85}
+
+/* ============ SECTION TITLE ============ */
+.section-title{
+  display:flex;align-items:center;justify-content:space-between;
+  margin:26px 4px 12px;
+}
+.section-title h3{font-size:.95rem;font-weight:600;color:var(--text)}
+.section-title .more{
+  font-size:.78rem;color:var(--accent);font-weight:500;
+  display:flex;align-items:center;gap:4px;
+}
+.section-title svg{width:14px;height:14px;stroke:var(--accent);stroke-width:2}
+
+/* ============ QUICK CARDS ============ */
+.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.quick-card{
+  padding:20px 18px;
+  border-radius:var(--radius);
+  display:flex;flex-direction:column;gap:10px;
+  position:relative;overflow:hidden;
+  cursor:pointer;
+  transition:transform var(--t);
+}
+.quick-card:active{transform:scale(.97)}
+.quick-card .qc-icon{
+  width:38px;height:38px;border-radius:12px;
+  display:grid;place-items:center;
+  background:var(--accent-soft);
+  color:var(--accent);
+}
+.quick-card .qc-icon svg{width:20px;height:20px;stroke:var(--accent);stroke-width:1.8}
+.quick-card .qc-label{font-size:1rem;font-weight:600;color:var(--text)}
+.quick-card .qc-meta{font-size:.75rem;color:var(--text-2)}
+.quick-card .qc-arrow{
+  position:absolute;top:18px;left:18px;
+  opacity:.4;transition:opacity var(--t),transform var(--t);
+}
+.quick-card .qc-arrow svg{width:16px;height:16px;stroke:var(--text);stroke-width:1.8}
+.quick-card:hover .qc-arrow{opacity:.9;transform:translateX(-2px)}
+
+/* morning card accent */
+.quick-card.morning .qc-icon{background:rgba(255,200,120,.18);color:#c89b52}
+.quick-card.morning .qc-icon svg{stroke:#c89b52}
+/* evening card accent */
+.quick-card.evening .qc-icon{background:rgba(140,150,200,.18);color:#7a86b8}
+.quick-card.evening .qc-icon svg{stroke:#7a86b8}
+
+/* ============ PROGRESS CARD ============ */
+.progress-card{padding:22px 20px}
+.pc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.pc-head h3{font-size:1rem}
+.pc-head small{font-size:.75rem;color:var(--text-2)}
+.ring-wrap{display:flex;align-items:center;gap:20px}
+.ring{position:relative;width:90px;height:90px;flex-shrink:0}
+.ring svg{transform:rotate(-90deg);width:90px;height:90px}
+.ring .track{fill:none;stroke:var(--accent-soft);stroke-width:8}
+.ring .bar{
+  fill:none;stroke:var(--accent);stroke-width:8;stroke-linecap:round;
+  stroke-dasharray:251.2;
+  stroke-dashoffset:251.2;
+  transition:stroke-dashoffset 1s cubic-bezier(0.4,0,0.2,1);
+  filter:drop-shadow(0 0 6px var(--accent-soft));
+}
+.ring .ring-label{
+  position:absolute;inset:0;display:grid;place-items:center;
+  font-size:1.3rem;font-weight:700;color:var(--text);
+}
+.ring .ring-label small{font-size:.7rem;color:var(--text-2);font-weight:400;margin-right:1px}
+.pc-info{flex:1;display:flex;flex-direction:column;gap:8px}
+.pc-info .pct{font-size:.95rem;font-weight:600}
+.pc-info .pct small{font-size:.72rem;color:var(--text-2);font-weight:400}
+.pc-legend{display:flex;flex-direction:column;gap:6px;margin-top:2px}
+.legend-row{display:flex;align-items:center;justify-content:space-between;font-size:.78rem;color:var(--text-2)}
+.legend-row .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);margin-left:6px;display:inline-block}
+.legend-row .dot.evening{background:#7a86b8}
+.legend-row strong{color:var(--text);font-weight:600}
+
+/* ============ STATS MINI ============ */
+.mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.mini-stat{padding:14px 10px;border-radius:var(--radius-sm);text-align:center}
+.mini-stat .num{font-size:1.25rem;font-weight:700;color:var(--text)}
+.mini-stat .lbl{font-size:.7rem;color:var(--text-2);margin-top:2px}
+
+/* ============ TASBEEH SHORTCUT ============ */
+.tasbeeh-card{
+  padding:20px;display:flex;align-items:center;gap:16px;
+  cursor:pointer;transition:transform var(--t);
+}
+.tasbeeh-card:active{transform:scale(.98)}
+.tb-circle{
+  width:56px;height:56px;border-radius:50%;
+  background:radial-gradient(circle at 30% 25%,var(--moon),var(--accent));
+  display:grid;place-items:center;flex-shrink:0;
+  box-shadow:0 8px 24px var(--accent-soft);
+  position:relative;overflow:hidden;
+}
+.tb-circle::before{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.6),transparent 55%);
+}
+.tb-circle svg{width:24px;height:24px;stroke:#fff;stroke-width:1.8;position:relative;z-index:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.2))}
+.tb-info{flex:1}
+.tb-info h4{font-size:.95rem;margin-bottom:2px}
+.tb-info small{font-size:.75rem;color:var(--text-2)}
+
+/* ============ RECENT ============ */
+.recent-list{display:flex;flex-direction:column;gap:10px}
+.recent-item{
+  padding:16px 18px;display:flex;align-items:center;gap:14px;
+  border-radius:var(--radius-sm);cursor:pointer;
+  transition:transform var(--t);
+}
+.recent-item:active{transform:scale(.98)}
+.recent-item .ri-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--accent-soft);color:var(--accent);
+  display:grid;place-items:center;flex-shrink:0;
+}
+.recent-item .ri-icon svg{width:18px;height:18px;stroke:var(--accent);stroke-width:1.8}
+.recent-item .ri-body{flex:1;min-width:0}
+.recent-item .ri-body p{
+  font-size:.85rem;color:var(--text);font-weight:500;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.recent-item .ri-body small{font-size:.72rem;color:var(--text-2)}
+.recent-item .ri-time{font-size:.7rem;color:var(--text-2);flex-shrink:0}
+
+/* ============ BOTTOM NAV ============ */
+.bottom-nav{
+  position:fixed;bottom:16px;left:50%;transform:translateX(-50%);
+  width:calc(100% - 32px);max-width:480px;
+  padding:8px;
+  display:flex;justify-content:space-around;align-items:center;
+  border-radius:26px;
+  z-index:100;
+}
+.nav-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:8px 4px;border-radius:18px;
+  color:var(--text-2);transition:all var(--t);
+  position:relative;
+}
+.nav-item svg{width:20px;height:20px;stroke-width:1.8;transition:stroke var(--t)}
+.nav-item span{font-size:.65rem;font-weight:500}
+.nav-item.is-active{color:var(--accent);background:var(--accent-soft)}
+.nav-item.is-active svg{stroke:var(--accent)}
+.nav-item:active{transform:scale(.92)}
+
+/* ============ EMPTY STATE ============ */
+.empty{
+  padding:32px 20px;text-align:center;
+  border-radius:var(--radius);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.empty svg{width:32px;height:32px;stroke:var(--text-2);stroke-width:1.5;opacity:.6}
+.empty p{font-size:.85rem}
+
+/* ============ RESPONSIVE ============ */
+@media(min-width:768px){
+  .view{padding:32px 24px 24px}
+  h1{font-size:1.85rem}
+  .bottom-nav{max-width:520px}
+}
+</style>
+</head>
+<body>
+
+<!-- Moon Background -->
+<div class="moon-bg" aria-hidden="true">
+  <div class="moon-glow moon-glow--1"></div>
+  <div class="moon-glow moon-glow--2"></div>
+  <div class="moon-glow moon-glow--3"></div>
+  <div class="crescent"></div>
+</div>
+
+<!-- App View -->
+<main id="view" class="view"></main>
+
+<!-- Bottom Nav -->
+<nav class="bottom-nav glass" id="bottomNav" aria-label="التنقل">
+  <a href="#/home"     class="nav-item is-active" data-route="home"><i data-lucide="home"></i><span>الرئيسية</span></a>
+  <a href="#/morning"  class="nav-item" data-route="morning"><i data-lucide="sunrise"></i><span>الصباح</span></a>
+  <a href="#/evening"  class="nav-item" data-route="evening"><i data-lucide="moon"></i><span>المساء</span></a>
+  <a href="#/all"      class="nav-item" data-route="all"><i data-lucide="book-open"></i><span>الأذكار</span></a>
+  <a href="#/settings" class="nav-item" data-route="settings"><i data-lucide="settings"></i><span>الإعدادات</span></a>
+</nav>
+
+<!-- Lucide -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+<script>
+/* =========================================================
+   STORAGE — versioned LocalStorage wrapper
+   ========================================================= */
+const Store = (() => {
+  const KEY = 'qamari_v1';
+  const defaultState = () => ({
+    version: 1,
+    theme: 'system',
+    counters: {},        // { id: count }
+    completed: {},       // { id: true }
+    favorites: [],
+    history: {},         // { 'YYYY-MM-DD': { total, morning, evening } }
+    tasbeeh: { sessions: [], current: 0, target: 33, dhikrId: null },
+    settings: { vibration: true, fontSize: 'md' },
+    lastVisit: null,
+    recent: []
+  });
+
+  function read() {
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (!raw) return defaultState();
+      const parsed = JSON.parse(raw);
+      return Object.assign(defaultState(), parsed);
+    } catch(e) { return defaultState(); }
+  }
+  function write(state) {
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){}
+  }
+  function update(mutator) {
+    const s = read();
+    mutator(s);
+    write(s);
+    return s;
+  }
+  return { read, write, update };
+})();
+
+/* =========================================================
+   UTILS
+   ========================================================= */
+const Utils = {
+  greet() {
+    const h = new Date().getHours();
+    if (h < 5) return 'طاب ليلك';
+    if (h < 12) return 'صباح الخير';
+    if (h < 17) return 'طاب نهارك';
+    if (h < 20) return 'مساء الخير';
+    return 'طاب مساؤك';
+  },
+  gregorian() {
+    return new Intl.DateTimeFormat('ar-EG', {
+      weekday:'long', day:'numeric', month:'long', year:'numeric'
+    }).format(new Date());
+  },
+  hijri() {
+    try {
+      return new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura', {
+        day:'numeric', month:'long', year:'numeric'
+      }).format(new Date());
+    } catch(e) { return ''; }
+  },
+  todayKey() {
+    const d = new Date();
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  },
+  vibrate(ms=10) {
+    const s = Store.read();
+    if (s.settings.vibration && navigator.vibrate) navigator.vibrate(ms);
+  },
+  refreshIcons() {
+    if (window.lucide) lucide.createIcons();
+  }
+};
+
+/* =========================================================
+   THEME
+   ========================================================= */
+const Theme = {
+  init() {
+    const s = Store.read();
+    this.apply(s.theme || 'system');
+  },
+  apply(mode) {
+    const isDark = mode === 'dark' ||
+      (mode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  },
+  set(mode) {
+    Store.update(s => { s.theme = mode; });
+    this.apply(mode);
+  }
+};
+
+/* =========================================================
+   HOME PAGE
+   ========================================================= */
+const HomePage = {
+  render() {
+    const s = Store.read();
+    const today = Utils.todayKey();
+    const history = s.history[today] || { total:0, morning:0, evening:0 };
+    const totalToday = history.total || 0;
+    const morningPct = Math.min(100, history.morning || 0);
+    const eveningPct = Math.min(100, history.evening || 0);
+    const overallPct = Math.round((morningPct + eveningPct) / 2);
+    const circumference = 251.2;
+    const offset = circumference - (circumference * overallPct / 100);
+    const recent = s.recent || [];
+
+    return `
+      <header class="app-header">
+        <div class="brand">
+          <div class="brand-logo"><span>☾</span></div>
+          <div class="brand-name">
+            <strong>أذكار قمرية</strong>
+            <small>QAMARI ADHKAR</small>
+          </div>
+        </div>
+        <button class="icon-btn" id="themeBtn" aria-label="تبديل الثيم">
+          <i data-lucide="sun-moon"></i>
+        </button>
+      </header>
+
+      <section class="greeting">
+        <h1>${Utils.greet()}</h1>
+        <div class="sub">نسأل الله أن يجعل يومك نورًا وسكينة</div>
+        <div class="dates">${Utils.gregorian()} &nbsp;•&nbsp; ${Utils.hijri()}</div>
+      </section>
+
+      <section class="quick-grid">
+        <a href="#/morning" class="quick-card glass morning">
+          <div class="qc-icon"><i data-lucide="sunrise"></i></div>
+          <div class="qc-label">أذكار الصباح</div>
+          <div class="qc-meta">${morningPct}% مكتمل</div>
+          <div class="qc-arrow"><i data-lucide="arrow-left"></i></div>
+        </a>
+        <a href="#/evening" class="quick-card glass evening">
+          <div class="qc-icon"><i data-lucide="moon"></i></div>
+          <div class="qc-label">أذكار المساء</div>
+          <div class="qc-meta">${eveningPct}% مكتمل</div>
+          <div class="qc-arrow"><i data-lucide="arrow-left"></i></div>
+        </a>
+      </section>
+
+      <div class="section-title">
+        <h3>تقدم اليوم</h3>
+        <span class="muted" style="font-size:.72rem">اليوم</span>
+      </div>
+
+      <section class="progress-card glass">
+        <div class="pc-head">
+          <h3>إجمالي التقدم</h3>
+          <small>${totalToday} ذكر</small>
+        </div>
+        <div class="ring-wrap">
+          <div class="ring">
+            <svg viewBox="0 0 90 90">
+              <circle class="track" cx="45" cy="45" r="40"></circle>
+              <circle class="bar" id="ringBar" cx="45" cy="45" r="40"
+                      style="stroke-dashoffset:${offset}"></circle>
+            </svg>
+            <div class="ring-label">${overallPct}<small>%</small></div>
+          </div>
+          <div class="pc-info">
+            <div class="pct">${overallPct}% <small>من أذكار اليوم</small></div>
+            <div class="pc-legend">
+              <div class="legend-row"><span><span class="dot"></span> الصباح</span><strong>${morningPct}%</strong></div>
+              <div class="legend-row"><span><span class="dot evening"></span> المساء</span><strong>${eveningPct}%</strong></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="mini-stats">
+        <div class="mini-stat glass"><div class="num">${totalToday}</div><div class="lbl">أذكار اليوم</div></div>
+        <div class="mini-stat glass"><div class="num">${s.favorites.length}</div><div class="lbl">المفضلة</div></div>
+        <div class="mini-stat glass"><div class="num">${s.tasbeeh.current || 0}</div><div class="lbl">تسبيح</div></div>
+      </div>
+
+      <div class="section-title">
+        <h3>المسبحة</h3>
+      </div>
+      <a href="#/tasbeeh" class="tasbeeh-card glass">
+        <div class="tb-circle"><i data-lucide="circle-dot"></i></div>
+        <div class="tb-info">
+          <h4>ابدأ التسبيح</h4>
+          <small>عدّاد إلكتروني بسيط • ${s.tasbeeh.target} هدف</small>
+        </div>
+        <i data-lucide="chevron-left" style="width:18px;height:18px;stroke:var(--text-2);stroke-width:1.8"></i>
+      </a>
+
+      <div class="section-title">
+        <h3>آخر ما قرأت</h3>
+        <a href="#/all" class="more">الكل <i data-lucide="chevron-left"></i></a>
+      </div>
+
+      <section class="recent-list">
+        ${recent.length ? recent.slice(0,3).map(r => `
+          <div class="recent-item glass">
+            <div class="ri-icon"><i data-lucide="bookmark"></i></div>
+            <div class="ri-body">
+              <p>${r.title || 'ذكر'}</p>
+              <small>${r.category || ''}</small>
+            </div>
+            <div class="ri-time">${r.time || ''}</div>
+          </div>
+        `).join('') : `
+          <div class="empty glass">
+            <i data-lucide="moon-star"></i>
+            <p>لم تقرأ أذكارًا بعد اليوم</p>
+            <small class="muted">ابدأ بأذكار الصباح أو المساء</small>
+          </div>
+        `}
+      </section>
+    `;
+  },
+
+  mount() {
+    const btn = document.getElementById('themeBtn');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        const s = Store.read();
+        const cur = s.theme;
+        const next = cur === 'light' ? 'dark' : cur === 'dark' ? 'system' : 'light';
+        Theme.set(next);
+        Utils.vibrate(8);
+        this.refresh();
+      });
+    }
+  },
+
+  refresh() {
+    const view = document.getElementById('view');
+    view.innerHTML = this.render();
+    this.mount();
+    Utils.refreshIcons();
+  }
+};
+
+/* =========================================================
+   ROUTER (lightweight)
+   ========================================================= */
+const Router = {
+  routes: {
+    home: HomePage,
+  },
+  init() {
+    window.addEventListener('hashchange', () => this.handle());
+    this.handle();
+  },
+  handle() {
+    const hash = location.hash.replace('#/', '') || 'home';
+    const [route] = hash.split('/');
+    const page = this.routes[route];
+    document.querySelectorAll('.nav-item').forEach(el => {
+      el.classList.toggle('is-active', el.dataset.route === route);
+    });
+    const view = document.getElementById('view');
+    if (page) {
+      view.innerHTML = page.render();
+      page.mount && page.mount();
+    } else {
+      view.innerHTML = `
+        <div class="empty glass" style="margin-top:40px">
+          <i data-lucide="construction"></i>
+          <p>الصفحة قادمة في المرحلة التالية</p>
+          <small class="muted">${route}</small>
+        </div>`;
+    }
+    Utils.refreshIcons();
+    window.scrollTo({ top:0, behavior:'smooth' });
+  }
+};
+
+/* =========================================================
+   APP BOOTSTRAP
+   ========================================================= */
+(function init(){
+  Theme.init();
+  Router.init();
+
+  // system theme watcher
+  window.matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', () => {
+      const s = Store.read();
+      if (s.theme === 'system') Theme.apply('system');
+    });
+
+  // first visit + daily total reset tracking
+  Store.update(s => {
+    const today = Utils.todayKey();
+    if (!s.history[today]) {
+      s.history[today] = { total:0, morning:0, evening:0 };
+    }
+    s.lastVisit = new Date().toISOString();
+  });
+})();
+</script>
+</body>
+  </html>
