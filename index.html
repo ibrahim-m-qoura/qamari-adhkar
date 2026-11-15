@@ -3,185 +3,146 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="theme-color" content="#101820" />
+<meta name="theme-color" content="#0B1016" />
 <meta name="description" content="أذكار قمرية — أذكار الصباح والمساء والأذكار اليومية مع تتبع وإحصائيات وعداد تسبيح وثيمات زجاجية" />
 <title>أذكار قمرية — Qamari Adhkar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <script>
-  // Anti-FOUC: تطبيق الثيم المحفوظ قبل الرسم
   try {
     const s = JSON.parse(localStorage.getItem('qamari_v1')||'{}');
-    const t = s.theme || 'moonlight';
-    document.documentElement.setAttribute('data-theme', t);
+    document.documentElement.setAttribute('data-theme', s.theme || 'moonlight');
   } catch(e){}
 </script>
 <style>
-/* ============ 1. RESET & BASE ============ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-/* ============ 2. الثيمات الثمانية ============ */
-/* الافتراضي: نور قمر هادئ (Moonlight) */
-:root, [data-theme="moonlight"] {
-  --bg: #0B1016;
-  --bg-2: #101820;
-  --glass: rgba(255,255,255,0.06);
-  --glass-strong: rgba(255,255,255,0.12);
-  --accent: #A1B9A3;
-  --accent-soft: rgba(161,185,163,0.15);
-  --text: #E9EEF0;
-  --text-2: #A0ADB5;
-  --border: rgba(255,255,255,0.12);
-  --moon: #DCE5E8;
-  --shadow: 0 8px 32px rgba(0,0,0,0.40);
-  --shadow-lg: 0 12px 48px rgba(0,0,0,0.55);
-  --radius: 22px;
-  --radius-sm: 14px;
-  --radius-lg: 28px;
-  --font: 'IBM Plex Sans Arabic', system-ui, sans-serif;
-  --t: 0.3s cubic-bezier(0.4,0,0.2,1);
-  --glass-border: rgba(255,255,255,0.18);
-  --specular: inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(255,255,255,0.05);
+/* ============ الثيمات الثمانية ============ */
+/* 1. نور قمر — داكن أزرق-أخضر */
+:root, [data-theme="moonlight"]{
+  --bg:#0B1016; --bg-2:#101820;
+  --glass:rgba(255,255,255,0.06); --glass-strong:rgba(255,255,255,0.12);
+  --accent:#A1B9A3; --accent-soft:rgba(161,185,163,0.15);
+  --text:#E9EEF0; --text-2:#A0ADB5;
+  --border:rgba(255,255,255,0.12); --moon:#DCE5E8;
+  --shadow:0 8px 32px rgba(0,0,0,0.40); --shadow-lg:0 12px 48px rgba(0,0,0,0.55);
+  --glass-border:rgba(255,255,255,0.18);
+  --specular:inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(255,255,255,0.05);
+  --nav-bg:rgba(16,24,32,0.75);
+  --accent-grad:linear-gradient(135deg,#A1B9A3,#DCE5E8);
 }
 
-/* 2. زجاج أبيض (Clear Glass) */
-[data-theme="clear"] {
-  --bg: #E8ECEF;
-  --bg-2: #D5DCE1;
-  --glass: rgba(255,255,255,0.45);
-  --glass-strong: rgba(255,255,255,0.70);
-  --accent: #5B7B6A;
-  --accent-soft: rgba(91,123,106,0.12);
-  --text: #1E2A24;
-  --text-2: #6B7A73;
-  --border: rgba(255,255,255,0.60);
-  --moon: #FFFFFF;
-  --shadow: 0 8px 32px rgba(30,42,36,0.08);
-  --shadow-lg: 0 12px 40px rgba(30,42,36,0.12);
-  --glass-border: rgba(255,255,255,0.80);
-  --specular: inset 0 1px 0 rgba(255,255,255,0.90), inset 0 -1px 0 rgba(255,255,255,0.30);
+/* 2. زجاج — فاتح شفاف */
+[data-theme="clear"]{
+  --bg:#EEF2F5; --bg-2:#DDE4EA;
+  --glass:rgba(255,255,255,0.50); --glass-strong:rgba(255,255,255,0.75);
+  --accent:#5B7B6A; --accent-soft:rgba(91,123,106,0.12);
+  --text:#1E2A24; --text-2:#6B7A73;
+  --border:rgba(255,255,255,0.70); --moon:#FFFFFF;
+  --shadow:0 8px 32px rgba(30,42,36,0.08); --shadow-lg:0 12px 40px rgba(30,42,36,0.12);
+  --glass-border:rgba(255,255,255,0.85);
+  --specular:inset 0 1px 0 rgba(255,255,255,0.95), inset 0 -1px 0 rgba(255,255,255,0.35);
+  --nav-bg:rgba(255,255,255,0.70);
+  --accent-grad:linear-gradient(135deg,#5B7B6A,#A8C4B4);
 }
 
-/* 3. ليلة القدر (Night of Power) */
-[data-theme="qadr"] {
-  --bg: #0A0A1A;
-  --bg-2: #12122B;
-  --glass: rgba(180,180,255,0.06);
-  --glass-strong: rgba(180,180,255,0.12);
-  --accent: #C9B8E8;
-  --accent-soft: rgba(201,184,232,0.15);
-  --text: #E8E6F0;
-  --text-2: #9A98B0;
-  --border: rgba(180,180,255,0.15);
-  --moon: #D8D0F0;
-  --shadow: 0 8px 40px rgba(0,0,0,0.50);
-  --shadow-lg: 0 12px 50px rgba(0,0,0,0.65);
-  --glass-border: rgba(201,184,232,0.25);
-  --specular: inset 0 1px 0 rgba(201,184,232,0.30);
+/* 3. ليلة — بنفسجي غامق */
+[data-theme="layl"]{
+  --bg:#0C0A18; --bg-2:#151226;
+  --glass:rgba(200,180,255,0.06); --glass-strong:rgba(200,180,255,0.12);
+  --accent:#B8A0E8; --accent-soft:rgba(184,160,232,0.15);
+  --text:#EAE6F5; --text-2:#9A92B8;
+  --border:rgba(200,180,255,0.15); --moon:#D8D0F0;
+  --shadow:0 8px 40px rgba(0,0,0,0.50); --shadow-lg:0 12px 50px rgba(0,0,0,0.65);
+  --glass-border:rgba(184,160,232,0.25);
+  --specular:inset 0 1px 0 rgba(184,160,232,0.30);
+  --nav-bg:rgba(21,18,38,0.75);
+  --accent-grad:linear-gradient(135deg,#B8A0E8,#7A6BB0);
 }
 
-/* 4. صحراء ذهبية (Golden Dunes) */
-[data-theme="dunes"] {
-  --bg: #2A2118;
-  --bg-2: #1F1810;
-  --glass: rgba(255,220,150,0.05);
-  --glass-strong: rgba(255,220,150,0.10);
-  --accent: #D4A85C;
-  --accent-soft: rgba(212,168,92,0.15);
-  --text: #F0E6D8;
-  --text-2: #B8A890;
-  --border: rgba(255,220,150,0.12);
-  --moon: #F0D8A8;
-  --shadow: 0 8px 32px rgba(0,0,0,0.40);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.55);
-  --glass-border: rgba(212,168,92,0.25);
-  --specular: inset 0 1px 0 rgba(212,168,92,0.25);
+/* 4. رمل — بيج دافئ */
+[data-theme="sand"]{
+  --bg:#F4EFE6; --bg-2:#E8DFD0;
+  --glass:rgba(255,245,230,0.55); --glass-strong:rgba(255,245,230,0.80);
+  --accent:#A87C4F; --accent-soft:rgba(168,124,79,0.15);
+  --text:#2E2418; --text-2:#8A7A60;
+  --border:rgba(255,245,230,0.80); --moon:#FFF5E0;
+  --shadow:0 8px 32px rgba(60,45,25,0.10); --shadow-lg:0 12px 40px rgba(60,45,25,0.15);
+  --glass-border:rgba(200,170,130,0.40);
+  --specular:inset 0 1px 0 rgba(255,255,255,0.90), inset 0 -1px 0 rgba(200,170,130,0.20);
+  --nav-bg:rgba(244,239,230,0.75);
+  --accent-grad:linear-gradient(135deg,#A87C4F,#E8C89A);
 }
 
-/* 5. زمرد (Emerald) */
-[data-theme="emerald"] {
-  --bg: #0C1612;
-  --bg-2: #14201A;
-  --glass: rgba(140,220,180,0.05);
-  --glass-strong: rgba(140,220,180,0.10);
-  --accent: #6BCB9A;
-  --accent-soft: rgba(107,203,154,0.15);
-  --text: #E0F0E8;
-  --text-2: #8AA898;
-  --border: rgba(140,220,180,0.12);
-  --moon: #B8E8D0;
-  --shadow: 0 8px 32px rgba(0,0,0,0.40);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.55);
-  --glass-border: rgba(107,203,154,0.25);
-  --specular: inset 0 1px 0 rgba(107,203,154,0.25);
+/* 5. زمرد — أخضر داكن فاخر */
+[data-theme="emerald"]{
+  --bg:#08120E; --bg-2:#0F1E17;
+  --glass:rgba(140,220,180,0.06); --glass-strong:rgba(140,220,180,0.12);
+  --accent:#5FD99A; --accent-soft:rgba(95,217,154,0.15);
+  --text:#E0F0E8; --text-2:#8AA898;
+  --border:rgba(140,220,180,0.15); --moon:#B8E8D0;
+  --shadow:0 8px 32px rgba(0,0,0,0.45); --shadow-lg:0 12px 40px rgba(0,0,0,0.60);
+  --glass-border:rgba(95,217,154,0.25);
+  --specular:inset 0 1px 0 rgba(95,217,154,0.30);
+  --nav-bg:rgba(15,30,23,0.75);
+  --accent-grad:linear-gradient(135deg,#5FD99A,#2A8B5A);
 }
 
-/* 6. وردة الفجر (Dawn Rose) */
-[data-theme="rose"] {
-  --bg: #1A1216;
-  --bg-2: #241A20;
-  --glass: rgba(255,180,200,0.05);
-  --glass-strong: rgba(255,180,200,0.10);
-  --accent: #E8A0B8;
-  --accent-soft: rgba(232,160,184,0.15);
-  --text: #F0E0E8;
-  --text-2: #B8A0A8;
-  --border: rgba(255,180,200,0.12);
-  --moon: #F0C8D8;
-  --shadow: 0 8px 32px rgba(0,0,0,0.40);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.55);
-  --glass-border: rgba(232,160,184,0.25);
-  --specular: inset 0 1px 0 rgba(232,160,184,0.25);
+/* 6. وردة — وردي دافئ */
+[data-theme="rose"]{
+  --bg:#F8EDF0; --bg-2:#F0DEE3;
+  --glass:rgba(255,240,245,0.55); --glass-strong:rgba(255,240,245,0.80);
+  --accent:#C8708F; --accent-soft:rgba(200,112,143,0.15);
+  --text:#2E1E24; --text-2:#8A6A75;
+  --border:rgba(255,240,245,0.80); --moon:#FFF0F5;
+  --shadow:0 8px 32px rgba(80,40,55,0.10); --shadow-lg:0 12px 40px rgba(80,40,55,0.15);
+  --glass-border:rgba(220,160,180,0.40);
+  --specular:inset 0 1px 0 rgba(255,255,255,0.90), inset 0 -1px 0 rgba(220,160,180,0.20);
+  --nav-bg:rgba(248,237,240,0.75);
+  --accent-grad:linear-gradient(135deg,#C8708F,#F0B8C8);
 }
 
-/* 7. محيط (Ocean) */
-[data-theme="ocean"] {
-  --bg: #0A1620;
-  --bg-2: #0F202E;
-  --glass: rgba(140,200,255,0.05);
-  --glass-strong: rgba(140,200,255,0.10);
-  --accent: #6BB8E8;
-  --accent-soft: rgba(107,184,232,0.15);
-  --text: #E0EEF8;
-  --text-2: #8AA8B8;
-  --border: rgba(140,200,255,0.12);
-  --moon: #B8D8F0;
-  --shadow: 0 8px 32px rgba(0,0,0,0.40);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.55);
-  --glass-border: rgba(107,184,232,0.25);
-  --specular: inset 0 1px 0 rgba(107,184,232,0.25);
+/* 7. محيط — أزرق بحري */
+[data-theme="ocean"]{
+  --bg:#061520; --bg-2:#0A2235;
+  --glass:rgba(140,200,255,0.06); --glass-strong:rgba(140,200,255,0.12);
+  --accent:#5BB8E8; --accent-soft:rgba(91,184,232,0.15);
+  --text:#E0EEF8; --text-2:#8AA8B8;
+  --border:rgba(140,200,255,0.15); --moon:#B8D8F0;
+  --shadow:0 8px 32px rgba(0,0,0,0.45); --shadow-lg:0 12px 40px rgba(0,0,0,0.60);
+  --glass-border:rgba(91,184,232,0.25);
+  --specular:inset 0 1px 0 rgba(91,184,232,0.30);
+  --nav-bg:rgba(10,34,53,0.75);
+  --accent-grad:linear-gradient(135deg,#5BB8E8,#2A6B9A);
 }
 
-/* 8. رمادي حجري (Stone) */
-[data-theme="stone"] {
-  --bg: #1A1A1A;
-  --bg-2: #242424;
-  --glass: rgba(255,255,255,0.05);
-  --glass-strong: rgba(255,255,255,0.10);
-  --accent: #B0B0B0;
-  --accent-soft: rgba(176,176,176,0.12);
-  --text: #E8E8E8;
-  --text-2: #999999;
-  --border: rgba(255,255,255,0.10);
-  --moon: #D0D0D0;
-  --shadow: 0 8px 32px rgba(0,0,0,0.45);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.60);
-  --glass-border: rgba(255,255,255,0.15);
-  --specular: inset 0 1px 0 rgba(255,255,255,0.15);
+/* 8. فحم — رمادي حجري */
+[data-theme="charcoal"]{
+  --bg:#141414; --bg-2:#1E1E1E;
+  --glass:rgba(255,255,255,0.05); --glass-strong:rgba(255,255,255,0.10);
+  --accent:#B8B8B8; --accent-soft:rgba(184,184,184,0.12);
+  --text:#E8E8E8; --text-2:#999999;
+  --border:rgba(255,255,255,0.10); --moon:#D0D0D0;
+  --shadow:0 8px 32px rgba(0,0,0,0.50); --shadow-lg:0 12px 40px rgba(0,0,0,0.65);
+  --glass-border:rgba(255,255,255,0.15);
+  --specular:inset 0 1px 0 rgba(255,255,255,0.18);
+  --nav-bg:rgba(30,30,30,0.75);
+  --accent-grad:linear-gradient(135deg,#B8B8B8,#787878);
 }
 
-/* ============ 3. GLOBAL ============ */
+/* ============ GLOBAL ============ */
+:root{
+  --radius:22px; --radius-sm:14px; --radius-lg:28px;
+  --font:'IBM Plex Sans Arabic',system-ui,sans-serif;
+  --t:0.3s cubic-bezier(0.4,0,0.2,1);
+}
 html,body{height:100%}
 body{
-  font-family:var(--font);
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.6;
-  -webkit-font-smoothing:antialiased;
-  transition: background var(--t), color var(--t);
-  overflow-x:hidden;
-  padding-bottom:110px;
+  font-family:var(--font); background:var(--bg); color:var(--text);
+  line-height:1.6; -webkit-font-smoothing:antialiased;
+  transition:background var(--t),color var(--t);
+  overflow-x:hidden; padding-bottom:110px;
 }
 h1,h2,h3,h4{font-weight:600;line-height:1.3;letter-spacing:-0.01em}
 h1{font-size:1.6rem} h2{font-size:1.25rem} h3{font-size:1.05rem}
@@ -192,51 +153,41 @@ a{color:inherit;text-decoration:none}
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-thumb{background:var(--accent-soft);border-radius:3px}
 
-/* ============ 4. الزجاج السائل (Liquid Glass Base) ============ */
+/* ============ الزجاج ============ */
 .glass{
-  background: var(--glass);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius);
-  box-shadow: var(--specular), var(--shadow);
-  transition: background var(--t), border-color var(--t), box-shadow var(--t);
+  background:var(--glass);
+  backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius);
+  box-shadow:var(--specular),var(--shadow);
+  transition:background var(--t),border-color var(--t),box-shadow var(--t);
 }
-@supports not (backdrop-filter: blur(1px)){
-  .glass{ background: var(--glass-strong); }
-}
-/* Fallback لمن يفضل تقليل الشفافية */
-@media (prefers-reduced-transparency: reduce) {
-  .glass { background: var(--bg-2); backdrop-filter: none; }
-}
+@supports not (backdrop-filter:blur(1px)){.glass{background:var(--glass-strong)}}
 
-/* ============ 5. خلفية نور القمر ============ */
+/* ============ خلفية نور القمر ============ */
 .moon-bg{
-  position:fixed; inset:0; z-index:-1; overflow:hidden;
+  position:fixed;inset:0;z-index:-1;overflow:hidden;
   background:
-    radial-gradient(ellipse at 50% -20%, var(--moon) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 120%, var(--accent-soft) 0%, transparent 40%),
-    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
-  pointer-events:none;
-  transition: background var(--t);
+    radial-gradient(ellipse at 50% -20%,var(--moon) 0%,transparent 50%),
+    radial-gradient(ellipse at 80% 120%,var(--accent-soft) 0%,transparent 40%),
+    linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%);
+  pointer-events:none;transition:background var(--t);
 }
-.moon-glow{
-  position:absolute; border-radius:50%; filter:blur(100px); opacity:.4;
-  animation: float 20s ease-in-out infinite;
-}
-.moon-glow--1{ width:400px; height:400px; top:-150px; left:50%; transform:translateX(-50%); background:radial-gradient(circle, var(--moon), transparent 70%); opacity:.25; }
-.moon-glow--2{ width:300px; height:300px; bottom:5%; left:-100px; background:radial-gradient(circle, var(--accent), transparent 70%); animation-delay:-7s; }
-.moon-glow--3{ width:250px; height:250px; bottom:20%; right:-80px; background:radial-gradient(circle, var(--moon), transparent 70%); animation-delay:-14s; opacity:.15; }
+.moon-glow{position:absolute;border-radius:50%;filter:blur(100px);opacity:.35;animation:float 20s ease-in-out infinite}
+.moon-glow--1{width:400px;height:400px;top:-150px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,var(--moon),transparent 70%);opacity:.22}
+.moon-glow--2{width:300px;height:300px;bottom:5%;left:-100px;background:radial-gradient(circle,var(--accent),transparent 70%);animation-delay:-7s}
+.moon-glow--3{width:250px;height:250px;bottom:20%;right:-80px;background:radial-gradient(circle,var(--moon),transparent 70%);animation-delay:-14s;opacity:.15}
 @keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(20px,-30px) scale(1.08)}}
 
-/* ============ 6. LAYOUT ============ */
+/* ============ LAYOUT ============ */
 .view{max-width:520px;margin:0 auto;padding:24px 18px 20px;animation:fadeIn .35s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-/* ============ 7. HEADER & NAV ============ */
+/* ============ HEADER ============ */
 .app-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
 .brand{display:flex;align-items:center;gap:10px}
-.brand-logo{width:44px;height:44px;border-radius:16px;background:linear-gradient(135deg,var(--accent),var(--moon));display:grid;place-items:center;font-size:1.4rem;box-shadow:0 6px 20px var(--accent-soft);position:relative;overflow:hidden}
+.brand-logo{width:44px;height:44px;border-radius:16px;background:var(--accent-grad);display:grid;place-items:center;font-size:1.4rem;box-shadow:0 6px 20px var(--accent-soft);position:relative;overflow:hidden}
 .brand-logo::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.5),transparent 60%)}
 .brand-logo span{position:relative;z-index:1;color:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.3))}
 .brand-name{display:flex;flex-direction:column;line-height:1.1}
@@ -246,12 +197,11 @@ a{color:inherit;text-decoration:none}
 .icon-btn:active{transform:scale(.92)}
 .icon-btn svg{width:20px;height:20px;stroke:var(--text);stroke-width:1.8}
 
-/* ============ 8. HOME ============ */
+/* ============ HOME ============ */
 .greeting{margin-bottom:22px}
 .greeting h1{margin-bottom:4px}
 .greeting .sub{font-size:.88rem;color:var(--text-2)}
 .greeting .dates{font-size:.78rem;color:var(--text-2);margin-top:6px;opacity:.8}
-
 .quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .quick-card{padding:20px 18px;border-radius:var(--radius);display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden;cursor:pointer;transition:transform var(--t)}
 .quick-card:active{transform:scale(.97)}
@@ -259,11 +209,8 @@ a{color:inherit;text-decoration:none}
 .quick-card .qc-icon svg{width:20px;height:20px;stroke:var(--accent);stroke-width:1.8}
 .quick-card .qc-label{font-size:1rem;font-weight:600;color:var(--text)}
 .quick-card .qc-meta{font-size:.75rem;color:var(--text-2)}
-
 .section-title{display:flex;align-items:center;justify-content:space-between;margin:26px 4px 12px}
 .section-title h3{font-size:.95rem;font-weight:600;color:var(--text)}
-
-/* Progress Ring */
 .progress-card{padding:22px 20px}
 .pc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .pc-head h3{font-size:1rem}
@@ -282,43 +229,31 @@ a{color:inherit;text-decoration:none}
 .legend-row .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);margin-left:6px;display:inline-block}
 .legend-row .dot.evening{background:var(--moon)}
 .legend-row strong{color:var(--text);font-weight:600}
-
 .mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
 .mini-stat{padding:14px 10px;border-radius:var(--radius-sm);text-align:center}
 .mini-stat .num{font-size:1.25rem;font-weight:700;color:var(--text)}
 .mini-stat .lbl{font-size:.7rem;color:var(--text-2);margin-top:2px}
 
-/* ============ 9. أذكار (CARDS) ============ */
+/* ============ ADHKAR ============ */
 .cat-scroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:16px;-webkit-overflow-scrolling:touch}
-.cat-chip{padding:8px 18px;border-radius:24px;white-space:nowrap;font-size:.8rem;transition:all var(--t);cursor:pointer;background:var(--glass);border:1px solid var(--glass-border);color:var(--text);backdrop-filter:blur(12px)}
+.cat-chip{padding:8px 16px;border-radius:24px;white-space:nowrap;font-size:.8rem;transition:all var(--t);cursor:pointer;background:var(--glass);border:1px solid var(--glass-border);color:var(--text);backdrop-filter:blur(12px);display:flex;align-items:center;gap:6px}
+.cat-chip svg{width:14px;height:14px;stroke:currentColor;stroke-width:2}
 .cat-chip.active{background:var(--accent);color:#fff;border-color:transparent;box-shadow:0 4px 16px var(--accent-soft)}
-
 .adhkar-list{display:flex;flex-direction:column;gap:12px}
-.adhkar-card{
-  padding:20px; border-radius: var(--radius-sm);
-  cursor: pointer; user-select: none;
-  transition: transform .15s, opacity var(--t), background var(--t);
-}
-.adhkar-card:active{ transform: scale(.98); }
-.adhkar-card.done{ opacity:.55; }
-.adhkar-text{ font-size:.95rem; line-height:1.9; margin-bottom:14px; color:var(--text); }
-.adhkar-footer{ display:flex; align-items:center; justify-content:space-between; }
-.adhkar-source{ font-size:.7rem; color:var(--text-2); background:var(--accent-soft); padding:2px 8px; border-radius:8px; }
-.adhkar-counter{ font-size:.8rem; color:var(--text-2); font-variant-numeric: tabular-nums; }
-.adhkar-counter strong{ color:var(--accent); font-weight:700; }
+.adhkar-card{padding:20px;border-radius:var(--radius-sm);cursor:pointer;user-select:none;transition:transform .15s,opacity var(--t),background var(--t)}
+.adhkar-card:active{transform:scale(.98)}
+.adhkar-card.done{opacity:.55}
+.adhkar-text{font-size:.95rem;line-height:1.9;margin-bottom:14px;color:var(--text)}
+.adhkar-footer{display:flex;align-items:center;justify-content:space-between}
+.adhkar-source{font-size:.7rem;color:var(--text-2);background:var(--accent-soft);padding:2px 8px;border-radius:8px}
+.adhkar-counter{font-size:.8rem;color:var(--text-2);font-variant-numeric:tabular-nums}
+.adhkar-counter strong{color:var(--accent);font-weight:700}
 
-/* ============ 10. TASBEEH ============ */
-.tasbeeh-main-btn{
-  width:140px;height:140px;border-radius:50%;
-  background:radial-gradient(circle at 35% 30%, var(--moon), var(--accent));
-  border:none;color:#fff;font-size:1.6rem;font-weight:600;
-  box-shadow: 0 12px 48px var(--accent-soft), var(--specular);
-  transition:transform .1s; margin:0 auto; display:block;
-  cursor:pointer;
-}
-.tasbeeh-main-btn:active{ transform:scale(.94); }
+/* ============ TASBEEH ============ */
+.tasbeeh-main-btn{width:140px;height:140px;border-radius:50%;background:var(--accent-grad);border:none;color:#fff;font-size:1.6rem;font-weight:600;box-shadow:0 12px 48px var(--accent-soft),var(--specular);transition:transform .1s;margin:0 auto;display:block;cursor:pointer}
+.tasbeeh-main-btn:active{transform:scale(.94)}
 
-/* ============ 11. SETTINGS ============ */
+/* ============ SETTINGS ============ */
 .setting-row{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-radius:var(--radius-sm)}
 .toggle{width:48px;height:28px;border-radius:14px;background:var(--accent-soft);position:relative;transition:background var(--t);cursor:pointer}
 .toggle.on{background:var(--accent)}
@@ -326,36 +261,25 @@ a{color:inherit;text-decoration:none}
 .toggle.on::after{transform:translateX(-20px)}
 .theme-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:8px}
 .theme-swatch{
-  aspect-ratio:1; border-radius:14px; display:flex; align-items:center; justify-content:center;
-  font-size:.65rem; font-weight:600; text-align:center; cursor:pointer;
-  border:2px solid transparent; transition:all var(--t); position:relative; overflow:hidden;
+  aspect-ratio:1;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  font-size:.65rem;font-weight:600;text-align:center;cursor:pointer;
+  border:2px solid transparent;transition:all var(--t);position:relative;overflow:hidden;
+  padding:4px;
 }
-.theme-swatch.active{ border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft); }
+.theme-swatch.active{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.theme-swatch .swatch-dot{width:24px;height:24px;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.theme-swatch .swatch-name{font-size:.6rem;line-height:1}
 
-/* ============ 12. BOTTOM NAV ============ */
-.bottom-nav{
-  position:fixed;bottom:16px;left:50%;transform:translateX(-50%);
-  width:calc(100% - 32px);max-width:480px;
-  padding:8px;display:flex;justify-content:space-around;align-items:center;
-  border-radius:28px;z-index:100;
-}
-.nav-item{
-  flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
-  padding:8px 4px;border-radius:20px;color:var(--text-2);
-  transition:all var(--t);position:relative;
-}
+/* ============ BOTTOM NAV ============ */
+.bottom-nav{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);width:calc(100% - 32px);max-width:480px;padding:8px;display:flex;justify-content:space-around;align-items:center;border-radius:28px;z-index:100;background:var(--nav-bg);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--glass-border);box-shadow:var(--specular),var(--shadow-lg)}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:20px;color:var(--text-2);transition:all var(--t);position:relative}
 .nav-item svg{width:20px;height:20px;stroke-width:1.8;transition:stroke var(--t)}
 .nav-item span{font-size:.65rem;font-weight:500}
 .nav-item.is-active{color:var(--accent);background:var(--accent-soft)}
 .nav-item.is-active svg{stroke:var(--accent)}
 .nav-item:active{transform:scale(.92)}
 
-/* ============ 13. RESPONSIVE ============ */
-@media(min-width:768px){
-  .view{padding:32px 24px 24px}
-  h1{font-size:1.85rem}
-  .bottom-nav{max-width:520px}
-}
+@media(min-width:768px){.view{padding:32px 24px 24px}h1{font-size:1.85rem}.bottom-nav{max-width:520px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -369,7 +293,7 @@ a{color:inherit;text-decoration:none}
 
 <main id="view" class="view"></main>
 
-<nav class="bottom-nav glass" id="bottomNav" aria-label="التنقل">
+<nav class="bottom-nav" id="bottomNav" aria-label="التنقل">
   <a href="#/home"     class="nav-item is-active" data-route="home"><i data-lucide="home"></i><span>الرئيسية</span></a>
   <a href="#/adhkar"   class="nav-item" data-route="adhkar"><i data-lucide="book-open"></i><span>الأذكار</span></a>
   <a href="#/tasbeeh"  class="nav-item" data-route="tasbeeh"><i data-lucide="circle-dot"></i><span>المسبحة</span></a>
@@ -380,7 +304,7 @@ a{color:inherit;text-decoration:none}
 
 <script>
 /* =========================================================
-   1) ADHKAR DATA — المصادر: حصن المسلم، البخاري، مسلم، أبو داود
+   1) ADHKAR DATA
    ========================================================= */
 const AdhkarData = {
   morning: [
@@ -452,9 +376,15 @@ const AdhkarCategories = {
   ],
 };
 
-// flatten lookup
 const AllAdhkar = {};
 Object.values(AdhkarCategories).forEach(arr => arr.forEach(d => { AllAdhkar[d.id] = d; }));
+
+/* أيقونات الفئات */
+const CategoryIcons = {
+  'الصباح':'sunrise', 'المساء':'moon', 'النوم':'bed', 'الاستيقاظ':'sun',
+  'الصلاة':'landmark', 'الطعام':'utensils', 'السفر':'plane', 'المطر والريح':'cloud-rain',
+  'دخول المنزل':'home'
+};
 
 /* =========================================================
    2) STORE
@@ -462,134 +392,93 @@ Object.values(AdhkarCategories).forEach(arr => arr.forEach(d => { AllAdhkar[d.id
 const Store = (() => {
   const KEY = 'qamari_v1';
   const defaultState = () => ({
-    version: 4,
-    theme: 'moonlight',
-    counters: {},      // { adhkarId: { count, date } }
-    completed: {},     // { 'YYYY-MM-DD': { adhkarId: true } }
-    favorites: [],
-    history: {},
-    tasbeeh: {
-      sessions: [],
-      current: 0,
-      target: 33,
-      totalAllTime: 0,
-      today: { date: '', count: 0 }
-    },
-    settings: { vibration: true },
-    lastVisit: null,
-    recent: []
+    version: 5, theme:'moonlight',
+    counters:{}, completed:{}, favorites:[], history:{},
+    tasbeeh:{sessions:[],current:0,target:33,totalAllTime:0,today:{date:'',count:0}},
+    settings:{vibration:true}, lastVisit:null, recent:[]
   });
   function read() {
     try {
       const raw = localStorage.getItem(KEY);
       if (!raw) return defaultState();
-      const parsed = JSON.parse(raw);
-      return Object.assign(defaultState(), parsed);
+      return Object.assign(defaultState(), JSON.parse(raw));
     } catch(e) { return defaultState(); }
   }
   function write(state) {
     try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){}
   }
-  function update(mutator) {
-    const s = read(); mutator(s); write(s); return s;
-  }
+  function update(mutator) { const s = read(); mutator(s); write(s); return s; }
   return { read, write, update };
 })();
 
 /* =========================================================
    3) UTILS
    ========================================================= */
-const fmtGreg = new Intl.DateTimeFormat('ar-EG', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+const fmtGreg = new Intl.DateTimeFormat('ar-EG',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 let fmtHijri = null;
-try { fmtHijri = new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura', { day:'numeric', month:'long', year:'numeric' }); } catch(e){}
+try{ fmtHijri = new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura',{day:'numeric',month:'long',year:'numeric'}); }catch(e){}
 
 const Utils = {
-  greet() {
-    const h = new Date().getHours();
-    if (h < 5) return 'طاب ليلك';
-    if (h < 12) return 'صباح الخير';
-    if (h < 17) return 'طاب نهارك';
-    if (h < 20) return 'مساء الخير';
-    return 'طاب مساؤك';
-  },
-  gregorian() { return fmtGreg.format(new Date()); },
-  hijri() { return fmtHijri ? fmtHijri.format(new Date()) : ''; },
-  todayKey() {
-    const d = new Date();
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-  },
-  vibrate(ms=10) {
-    const s = Store.read();
-    if (s.settings.vibration && navigator.vibrate) navigator.vibrate(ms);
-  },
-  refreshIcons() { if (window.lucide) lucide.createIcons(); }
+  greet(){ const h=new Date().getHours();
+    if(h<5)return'طاب ليلك'; if(h<12)return'صباح الخير';
+    if(h<17)return'طاب نهارك'; if(h<20)return'مساء الخير'; return'طاب مساؤك'; },
+  gregorian(){ return fmtGreg.format(new Date()); },
+  hijri(){ return fmtHijri ? fmtHijri.format(new Date()) : ''; },
+  todayKey(){ const d=new Date();
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; },
+  vibrate(ms=10){ const s=Store.read(); if(s.settings.vibration && navigator.vibrate) navigator.vibrate(ms); },
+  refreshIcons(){ if(window.lucide) lucide.createIcons(); }
 };
 
 /* =========================================================
-   4) THEME MANAGER
+   4) THEMES
    ========================================================= */
 const THEMES = [
-  { id:'moonlight', name:'نور قمر', class:'moonlight' },
-  { id:'clear',     name:'زجاج',    class:'clear' },
-  { id:'qadr',      name:'ليلة القدر', class:'qadr' },
-  { id:'dunes',     name:'صحراء',   class:'dunes' },
-  { id:'emerald',   name:'زمرد',    class:'emerald' },
-  { id:'rose',      name:'وردة',    class:'rose' },
-  { id:'ocean',     name:'محيط',    class:'ocean' },
-  { id:'stone',     name:'حجري',    class:'stone' },
+  { id:'moonlight', name:'نور قمر', color:'#A1B9A3' },
+  { id:'clear',     name:'زجاج',    color:'#5B7B6A' },
+  { id:'layl',      name:'ليلة',    color:'#B8A0E8' },
+  { id:'sand',      name:'رمل',     color:'#A87C4F' },
+  { id:'emerald',   name:'زمرد',    color:'#5FD99A' },
+  { id:'rose',      name:'وردة',    color:'#C8708F' },
+  { id:'ocean',     name:'محيط',    color:'#5BB8E8' },
+  { id:'charcoal',  name:'فحم',     color:'#B8B8B8' },
 ];
 
 const Theme = {
-  init() {
-    const saved = Store.read().theme || 'moonlight';
-    this.apply(saved);
-  },
-  apply(id) {
+  init(){ this.apply(Store.read().theme || 'moonlight'); },
+  apply(id){
     document.documentElement.setAttribute('data-theme', id);
-    // تحديث meta theme-color
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) {
-      const colors = {
-        moonlight:'#0B1016', clear:'#E8ECEF', qadr:'#0A0A1A', dunes:'#2A2118',
-        emerald:'#0C1612', rose:'#1A1216', ocean:'#0A1620', stone:'#1A1A1A'
-      };
+    if(meta){
+      const colors = {moonlight:'#0B1016',clear:'#EEF2F5',layl:'#0C0A18',sand:'#F4EFE6',emerald:'#08120E',rose:'#F8EDF0',ocean:'#061520',charcoal:'#141414'};
       meta.setAttribute('content', colors[id] || '#0B1016');
     }
   },
-  set(id) {
-    Store.update(s => { s.theme = id; });
-    this.apply(id);
-  }
+  set(id){ Store.update(s=>{s.theme=id;}); this.apply(id); }
 };
 
 /* =========================================================
-   5) HOME PAGE (مبسطة)
+   5) HOME PAGE
    ========================================================= */
 const HomePage = {
-  render() {
-    const s = Store.read();
-    const today = Utils.todayKey();
-    const completed = s.completed[today] || {};
-    const morningDone = AdhkarData.morning.filter(d => completed[d.id]).length;
-    const eveningDone = AdhkarData.evening.filter(d => completed[d.id]).length;
-    const morningPct = Math.round(morningDone / AdhkarData.morning.length * 100);
-    const eveningPct = Math.round(eveningDone / AdhkarData.evening.length * 100);
-    const overallPct = Math.round((morningPct + eveningPct) / 2);
-    const circumference = 251.2;
-    const offset = circumference - (circumference * overallPct / 100);
-    const t = s.tasbeeh;
-    const todayTasbeeh = (t.today && t.today.date === today) ? t.today.count : 0;
+  render(){
+    const s=Store.read(), today=Utils.todayKey(), completed=s.completed[today]||{};
+    const mDone=AdhkarData.morning.filter(d=>completed[d.id]).length;
+    const eDone=AdhkarData.evening.filter(d=>completed[d.id]).length;
+    const mPct=Math.round(mDone/AdhkarData.morning.length*100);
+    const ePct=Math.round(eDone/AdhkarData.evening.length*100);
+    const overall=Math.round((mPct+ePct)/2);
+    const offset=251.2-(251.2*overall/100);
+    const t=s.tasbeeh;
+    const todayT=(t.today&&t.today.date===today)?t.today.count:0;
 
     return `
       <header class="app-header">
         <div class="brand">
           <div class="brand-logo"><span>☾</span></div>
-          <div class="brand-name">
-            <strong>أذكار قمرية</strong>
-            <small>QAMARI ADHKAR</small>
-          </div>
+          <div class="brand-name"><strong>أذكار قمرية</strong><small>QAMARI ADHKAR</small></div>
         </div>
-        <button class="icon-btn" onclick="Router.go('#/settings')" aria-label="الإعدادات"><i data-lucide="settings"></i></button>
+        <button class="icon-btn" onclick="Router.go('#/settings')"><i data-lucide="settings"></i></button>
       </header>
 
       <section class="greeting">
@@ -602,45 +491,45 @@ const HomePage = {
         <div class="quick-card glass" onclick="Router.go('#/adhkar/morning')">
           <div class="qc-icon"><i data-lucide="sunrise"></i></div>
           <div class="qc-label">أذكار الصباح</div>
-          <div class="qc-meta">${morningPct}% مكتمل</div>
+          <div class="qc-meta">${mPct}% مكتمل</div>
         </div>
         <div class="quick-card glass" onclick="Router.go('#/adhkar/evening')">
           <div class="qc-icon"><i data-lucide="moon"></i></div>
           <div class="qc-label">أذكار المساء</div>
-          <div class="qc-meta">${eveningPct}% مكتمل</div>
+          <div class="qc-meta">${ePct}% مكتمل</div>
         </div>
       </section>
 
       <div class="section-title"><h3>تقدم اليوم</h3></div>
       <section class="progress-card glass">
-        <div class="pc-head"><h3>إجمالي التقدم</h3><small>${morningDone + eveningDone} ذكر</small></div>
+        <div class="pc-head"><h3>إجمالي التقدم</h3><small>${mDone+eDone} ذكر</small></div>
         <div class="ring-wrap">
           <div class="ring">
             <svg viewBox="0 0 90 90">
               <circle class="track" cx="45" cy="45" r="40"></circle>
               <circle class="bar" cx="45" cy="45" r="40" style="stroke-dashoffset:${offset}"></circle>
             </svg>
-            <div class="ring-label">${overallPct}<small>%</small></div>
+            <div class="ring-label">${overall}<small>%</small></div>
           </div>
           <div class="pc-info">
-            <div class="pct">${overallPct}% <small>من أذكار اليوم</small></div>
+            <div class="pct">${overall}% <small>من أذكار اليوم</small></div>
             <div class="pc-legend">
-              <div class="legend-row"><span><span class="dot"></span> الصباح</span><strong>${morningPct}%</strong></div>
-              <div class="legend-row"><span><span class="dot evening"></span> المساء</span><strong>${eveningPct}%</strong></div>
+              <div class="legend-row"><span><span class="dot"></span> الصباح</span><strong>${mPct}%</strong></div>
+              <div class="legend-row"><span><span class="dot evening"></span> المساء</span><strong>${ePct}%</strong></div>
             </div>
           </div>
         </div>
       </section>
 
       <div class="mini-stats">
-        <div class="mini-stat glass"><div class="num">${todayTasbeeh}</div><div class="lbl">تسبيح اليوم</div></div>
-        <div class="mini-stat glass"><div class="num">${t.totalAllTime || 0}</div><div class="lbl">إجمالي التسبيح</div></div>
-        <div class="mini-stat glass"><div class="num">${morningDone + eveningDone}</div><div class="lbl">أذكار اليوم</div></div>
+        <div class="mini-stat glass"><div class="num">${todayT}</div><div class="lbl">تسبيح اليوم</div></div>
+        <div class="mini-stat glass"><div class="num">${t.totalAllTime||0}</div><div class="lbl">إجمالي التسبيح</div></div>
+        <div class="mini-stat glass"><div class="num">${mDone+eDone}</div><div class="lbl">أذكار اليوم</div></div>
       </div>
 
       <div class="section-title"><h3>المسبحة</h3></div>
       <div class="glass" style="padding:20px;display:flex;align-items:center;gap:16px;cursor:pointer" onclick="Router.go('#/tasbeeh')">
-        <div style="width:56px;height:56px;border-radius:50%;background:radial-gradient(circle at 30% 25%,var(--moon),var(--accent));display:grid;place-items:center;flex-shrink:0">
+        <div style="width:56px;height:56px;border-radius:50%;background:var(--accent-grad);display:grid;place-items:center;flex-shrink:0">
           <i data-lucide="circle-dot" style="width:24px;height:24px;stroke:#fff;stroke-width:1.8"></i>
         </div>
         <div style="flex:1">
@@ -651,117 +540,91 @@ const HomePage = {
       </div>
     `;
   },
-  mount() {},
-  refresh() {
-    const view = document.getElementById('view');
-    view.innerHTML = this.render(); this.mount(); Utils.refreshIcons();
-  }
+  mount(){},
+  refresh(){ const v=document.getElementById('view'); v.innerHTML=this.render(); this.mount(); Utils.refreshIcons(); }
 };
 
 /* =========================================================
-   6) ADHKAR PAGE (مع إخفاء الصباح/المساء من التبويبات العلوية)
+   6) ADHKAR PAGE (الصباح/المساء في التبويبات العلوية)
    ========================================================= */
 const AdhkarPage = {
-  currentCategory: 'النوم', // افتراضي عند الدخول من التبويب السفلي
-  _userCategory: null,
+  currentCategory: 'الصباح',
 
-  render(forceCat) {
-    const s = Store.read();
-    const today = Utils.todayKey();
-    const cat = forceCat || this._userCategory || this.currentCategory;
-    this.currentCategory = cat;
-    const items = AdhkarCategories[cat] || [];
-    const completedToday = s.completed[today] || {};
-    const counters = s.counters || {};
-
-    // التبويبات العلوية: كل الفئات ما عدا الصباح والمساء
-    const visibleCats = Object.keys(AdhkarCategories).filter(c => c !== 'الصباح' && c !== 'المساء');
+  render(forceCat){
+    const s=Store.read(), today=Utils.todayKey();
+    const cat=forceCat || this.currentCategory;
+    this.currentCategory=cat;
+    const items=AdhkarCategories[cat]||[];
+    const completedToday=s.completed[today]||{};
+    const counters=s.counters||{};
 
     return `
       <header class="app-header"><h1>الأذكار</h1></header>
 
       <div class="cat-scroll">
-        ${visibleCats.map(c => `
-          <button class="cat-chip ${c===cat?'active':''}" onclick="AdhkarPage.switchCat('${c}')">${c}</button>
+        ${Object.keys(AdhkarCategories).map(c=>`
+          <button class="cat-chip ${c===cat?'active':''}" onclick="AdhkarPage.switchCat('${c}')">
+            <i data-lucide="${CategoryIcons[c]||'book'}"></i>${c}
+          </button>
         `).join('')}
       </div>
 
       <div class="adhkar-list">
-        ${items.map(d => {
-          let c = counters[d.id];
-          if (!c || c.date !== today) c = { count: 0, date: today };
-          const done = completedToday[d.id] || c.count >= d.count;
+        ${items.map(d=>{
+          let c=counters[d.id]; if(!c||c.date!==today) c={count:0,date:today};
+          const done=completedToday[d.id]||c.count>=d.count;
           return `
-            <div class="adhkar-card glass ${done?'done':''}" id="card-${d.id}" onclick="AdhkarPage.increment('${d.id}', ${d.count})">
+            <div class="adhkar-card glass ${done?'done':''}" id="card-${d.id}" onclick="AdhkarPage.increment('${d.id}',${d.count})">
               <div class="adhkar-text">${d.text}</div>
               <div class="adhkar-footer">
                 <span class="adhkar-source">${d.source}</span>
                 <span class="adhkar-counter" id="cnt-${d.id}"><strong>${c.count}</strong> / ${d.count}</span>
               </div>
-            </div>
-          `;
+            </div>`;
         }).join('')}
       </div>
     `;
   },
 
-  mount() {},
-  switchCat(cat) {
-    this.currentCategory = cat;
-    this._userCategory = cat;
-    const view = document.getElementById('view');
-    view.innerHTML = this.render(cat); this.mount(); Utils.refreshIcons();
+  mount(){},
+  switchCat(cat){
+    this.currentCategory=cat;
+    const v=document.getElementById('view');
+    v.innerHTML=this.render(cat); this.mount(); Utils.refreshIcons();
   },
-
-  increment(id, target) {
-    const s = Store.read();
-    const today = Utils.todayKey();
-    if (!s.completed[today]) s.completed[today] = {};
-    if (!s.counters) s.counters = {};
-
-    // عدّاد يومي لكل ذكر
-    let c = s.counters[id];
-    if (!c || c.date !== today) c = { count: 0, date: today };
-    c.count++;
-    s.counters[id] = c;
-
-    if (c.count >= target) s.completed[today][id] = true;
-
-    // تحديث السجل
-    if (!s.history[today]) s.history[today] = { total:0, morning:0, evening:0 };
-    const morningDone = AdhkarData.morning.filter(d => s.completed[today][d.id]).length;
-    const eveningDone = AdhkarData.evening.filter(d => s.completed[today][d.id]).length;
-    s.history[today].morning = Math.round(morningDone / AdhkarData.morning.length * 100);
-    s.history[today].evening = Math.round(eveningDone / AdhkarData.evening.length * 100);
-    s.history[today].total = morningDone + eveningDone;
-
-    Store.write(s);
-    Utils.vibrate(15);
-
-    // تحديث فوري للبطاقة
-    const card = document.getElementById('card-' + id);
-    if (card) {
-      const done = !!s.completed[today][id];
-      const cntEl = document.getElementById('cnt-' + id);
-      if (cntEl) cntEl.innerHTML = `<strong>${c.count}</strong> / ${target}`;
-      if (done) card.classList.add('done');
+  increment(id,target){
+    const s=Store.read(), today=Utils.todayKey();
+    if(!s.completed[today]) s.completed[today]={};
+    if(!s.counters) s.counters={};
+    let c=s.counters[id]; if(!c||c.date!==today) c={count:0,date:today};
+    c.count++; s.counters[id]=c;
+    if(c.count>=target) s.completed[today][id]=true;
+    if(!s.history[today]) s.history[today]={total:0,morning:0,evening:0};
+    const mDone=AdhkarData.morning.filter(d=>s.completed[today][d.id]).length;
+    const eDone=AdhkarData.evening.filter(d=>s.completed[today][d.id]).length;
+    s.history[today].morning=Math.round(mDone/AdhkarData.morning.length*100);
+    s.history[today].evening=Math.round(eDone/AdhkarData.evening.length*100);
+    s.history[today].total=mDone+eDone;
+    Store.write(s); Utils.vibrate(15);
+    const card=document.getElementById('card-'+id);
+    if(card){
+      const done=!!s.completed[today][id];
+      const cnt=document.getElementById('cnt-'+id);
+      if(cnt) cnt.innerHTML=`<strong>${c.count}</strong> / ${target}`;
+      if(done) card.classList.add('done');
     }
   }
 };
 
 /* =========================================================
-   7) TASBEEH PAGE
+   7) TASBEEH
    ========================================================= */
 const TasbeehPage = {
-  render() {
-    const s = Store.read();
-    const t = s.tasbeeh;
-    const today = Utils.todayKey();
-    const todayCount = (t.today && t.today.date === today) ? t.today.count : 0;
-
+  render(){
+    const s=Store.read(), t=s.tasbeeh, today=Utils.todayKey();
+    const todayCount=(t.today&&t.today.date===today)?t.today.count:0;
     return `
       <header class="app-header"><h1>المسبحة</h1></header>
-
       <div class="glass" style="padding:36px 20px;text-align:center;border-radius:var(--radius-lg);margin-bottom:16px">
         <div style="font-size:.85rem;color:var(--text-2);margin-bottom:8px">العدد الحالي</div>
         <div id="tasbeehCount" style="font-size:4.5rem;font-weight:700;color:var(--accent);line-height:1.1">${t.current||0}</div>
@@ -772,81 +635,63 @@ const TasbeehPage = {
           <button onclick="TasbeehPage.saveSession()" class="icon-btn" style="width:auto;padding:0 24px;height:44px;border-radius:14px;font-size:.85rem;background:var(--accent);color:#fff;border-color:transparent">حفظ الجلسة</button>
         </div>
       </div>
-
       <div class="mini-stats">
         <div class="mini-stat glass"><div class="num">${t.totalAllTime||0}</div><div class="lbl">إجمالي التسبيح</div></div>
         <div class="mini-stat glass"><div class="num">${todayCount}</div><div class="lbl">اليوم</div></div>
         <div class="mini-stat glass"><div class="num">${t.sessions?t.sessions.length:0}</div><div class="lbl">الجلسات</div></div>
       </div>
-
       <div class="section-title"><h3>آخر الجلسات</h3></div>
       <div style="display:flex;flex-direction:column;gap:8px">
-        ${(t.sessions||[]).slice(-5).reverse().map(sess => `
+        ${(t.sessions||[]).slice(-5).reverse().map(sess=>`
           <div class="glass" style="padding:14px 16px;border-radius:var(--radius-sm);display:flex;justify-content:space-between">
             <span style="font-size:.85rem">${sess.count} تسبيحة</span>
             <small style="color:var(--text-2)">${sess.date}</small>
-          </div>
-        `).join('') || '<p style="text-align:center;color:var(--text-2);font-size:.85rem">لا توجد جلسات بعد</p>'}
+          </div>`).join('')||'<p style="text-align:center;color:var(--text-2);font-size:.85rem">لا توجد جلسات بعد</p>'}
       </div>
     `;
   },
-  mount() {},
-  tap() {
-    const s = Store.read();
-    const t = s.tasbeeh;
-    const today = Utils.todayKey();
-    t.current = (t.current || 0) + 1;
-    t.totalAllTime = (t.totalAllTime || 0) + 1;
-    if (!t.today || t.today.date !== today) t.today = { date: today, count: 0 };
-    t.today.count += 1;
-    Store.write(s);
-    Utils.vibrate(10);
-    const el = document.getElementById('tasbeehCount');
-    if (el) el.textContent = t.current;
-    // اهتزاز مميز عند الوصول للهدف
-    if (t.current === t.target) {
-      Utils.vibrate([50, 30, 50, 30, 100]);
-    }
+  mount(){},
+  tap(){
+    const s=Store.read(), t=s.tasbeeh, today=Utils.todayKey();
+    t.current=(t.current||0)+1; t.totalAllTime=(t.totalAllTime||0)+1;
+    if(!t.today||t.today.date!==today) t.today={date:today,count:0};
+    t.today.count++;
+    Store.write(s); Utils.vibrate(10);
+    const el=document.getElementById('tasbeehCount'); if(el) el.textContent=t.current;
+    if(t.current===t.target) Utils.vibrate([50,30,50,30,100]);
   },
-  reset() {
-    const s = Store.read(); s.tasbeeh.current = 0; Store.write(s);
-    const el = document.getElementById('tasbeehCount'); if (el) el.textContent = 0;
-    Utils.vibrate(20);
-  },
-  saveSession() {
-    const s = Store.read(); const t = s.tasbeeh;
-    if (t.current > 0) {
-      t.sessions = t.sessions || [];
-      t.sessions.push({ count: t.current, date: Utils.todayKey() });
-      t.current = 0;
-      Store.write(s); Utils.vibrate(30);
-      const view = document.getElementById('view');
-      view.innerHTML = this.render(); Utils.refreshIcons();
+  reset(){ const s=Store.read(); s.tasbeeh.current=0; Store.write(s);
+    const el=document.getElementById('tasbeehCount'); if(el) el.textContent=0; Utils.vibrate(20); },
+  saveSession(){
+    const s=Store.read(), t=s.tasbeeh;
+    if(t.current>0){
+      t.sessions=t.sessions||[];
+      t.sessions.push({count:t.current,date:Utils.todayKey()});
+      t.current=0; Store.write(s); Utils.vibrate(30);
+      const v=document.getElementById('view'); v.innerHTML=this.render(); Utils.refreshIcons();
     }
   }
 };
 
 /* =========================================================
-   8) SETTINGS PAGE (مع اختيار الثيمات الثمانية)
+   8) SETTINGS
    ========================================================= */
 const SettingsPage = {
-  render() {
-    const s = Store.read();
+  render(){
+    const s=Store.read();
     return `
       <header class="app-header"><h1>الإعدادات</h1></header>
 
       <div class="section-title"><h3>الثيمات</h3></div>
       <div class="glass" style="padding:12px">
         <div class="theme-grid">
-          ${THEMES.map(th => `
-            <div class="theme-swatch ${s.theme===th.id?'active':''}" 
-                 onclick="SettingsPage.setTheme('${th.id}')"
-                 style="background:linear-gradient(135deg, var(--${th.id==='moonlight'?'accent':'accent'}), var(--moon));color:${th.id==='clear'?'#333':'#fff'}">
-              ${th.name}
+          ${THEMES.map(th=>`
+            <div class="theme-swatch ${s.theme===th.id?'active':''}" onclick="SettingsPage.setTheme('${th.id}')">
+              <div class="swatch-dot" style="background:${th.color}"></div>
+              <div class="swatch-name">${th.name}</div>
             </div>
           `).join('')}
         </div>
-        <p style="font-size:.7rem;color:var(--text-2);text-align:center;margin-top:8px">الثيم الحالي: ${THEMES.find(t=>t.id===s.theme)?.name || 'نور قمر'}</p>
       </div>
 
       <div class="section-title"><h3>الاهتزاز</h3></div>
@@ -857,11 +702,10 @@ const SettingsPage = {
 
       <div class="section-title"><h3>هدف المسبحة</h3></div>
       <div class="glass" style="padding:8px;display:flex;flex-direction:column;gap:4px">
-        ${[33,99,100].map(n => `
+        ${[33,99,100].map(n=>`
           <button onclick="SettingsPage.setTarget(${n})" style="padding:14px 16px;border-radius:12px;text-align:right;font-size:.9rem;background:${s.tasbeeh.target===n?'var(--accent-soft)':'transparent'};color:${s.tasbeeh.target===n?'var(--accent)':'var(--text)'}">
             ${n} تسبيحة
-          </button>
-        `).join('')}
+          </button>`).join('')}
       </div>
 
       <div class="section-title"><h3>البيانات</h3></div>
@@ -875,68 +719,48 @@ const SettingsPage = {
       </p>
     `;
   },
-  mount() {},
-  setTheme(id) { Theme.set(id); Router.handle(); },
-  toggleVibration() {
-    Store.update(s => { s.settings.vibration = !s.settings.vibration; });
-    Router.handle();
-  },
-  setTarget(n) {
-    Store.update(s => { s.tasbeeh.target = n; });
-    Router.handle();
-  },
-  exportData() {
-    const data = JSON.stringify(Store.read(), null, 2);
-    const blob = new Blob([data], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = 'qamari-backup-' + Utils.todayKey() + '.json';
+  mount(){},
+  setTheme(id){ Theme.set(id); Router.handle(); },
+  toggleVibration(){ Store.update(s=>{s.settings.vibration=!s.settings.vibration;}); Router.handle(); },
+  setTarget(n){ Store.update(s=>{s.tasbeeh.target=n;}); Router.handle(); },
+  exportData(){
+    const data=JSON.stringify(Store.read(),null,2);
+    const blob=new Blob([data],{type:'application/json'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url; a.download='qamari-backup-'+Utils.todayKey()+'.json';
     a.click(); URL.revokeObjectURL(url);
   },
-  resetData() {
-    if (confirm('هل أنت متأكد من حذف كل البيانات؟')) {
-      localStorage.removeItem('qamari_v1');
-      location.reload();
-    }
-  }
+  resetData(){ if(confirm('هل أنت متأكد من حذف كل البيانات؟')){ localStorage.removeItem('qamari_v1'); location.reload(); } }
 };
 
 /* =========================================================
-   9) ROUTER (يدعم #/adhkar/morning و #/adhkar/evening)
+   9) ROUTER
    ========================================================= */
 const Router = {
-  routes: { home: HomePage, adhkar: AdhkarPage, tasbeeh: TasbeehPage, settings: SettingsPage },
-  init() {
-    window.addEventListener('hashchange', () => this.handle());
-    this.handle();
-  },
-  go(hash) { location.hash = hash; },
-  handle() {
-    const hash = location.hash.replace('#/', '') || 'home';
-    const [route, sub] = hash.split('/');
-    const page = this.routes[route] || HomePage;
-
-    // تحديث التبويب النشط
-    document.querySelectorAll('.nav-item').forEach(el => {
-      el.classList.toggle('is-active', el.dataset.route === route);
+  routes:{home:HomePage,adhkar:AdhkarPage,tasbeeh:TasbeehPage,settings:SettingsPage},
+  init(){ window.addEventListener('hashchange',()=>this.handle()); this.handle(); },
+  go(hash){ location.hash=hash; },
+  handle(){
+    const hash=location.hash.replace('#/','')||'home';
+    const [route,sub]=hash.split('/');
+    const page=this.routes[route]||HomePage;
+    document.querySelectorAll('.nav-item').forEach(el=>{
+      el.classList.toggle('is-active',el.dataset.route===route);
     });
-
-    const view = document.getElementById('view');
-
-    // منطق خاص لصفحة الأذكار
-    if (route === 'adhkar') {
-      let forceCat = null;
-      if (sub === 'morning') forceCat = 'الصباح';
-      else if (sub === 'evening') forceCat = 'المساء';
-      view.innerHTML = AdhkarPage.render(forceCat);
+    const view=document.getElementById('view');
+    if(route==='adhkar'){
+      let forceCat=null;
+      if(sub==='morning') forceCat='الصباح';
+      else if(sub==='evening') forceCat='المساء';
+      view.innerHTML=AdhkarPage.render(forceCat);
       AdhkarPage.mount();
     } else {
-      view.innerHTML = page.render();
+      view.innerHTML=page.render();
       page.mount && page.mount();
     }
-
     Utils.refreshIcons();
-    window.scrollTo({ top:0, behavior:'smooth' });
+    window.scrollTo({top:0,behavior:'smooth'});
   }
 };
 
@@ -946,11 +770,11 @@ const Router = {
 (function init(){
   Theme.init();
   Router.init();
-  Store.update(s => {
-    const today = Utils.todayKey();
-    if (!s.history[today]) s.history[today] = { total:0, morning:0, evening:0 };
-    if (!s.tasbeeh.today || s.tasbeeh.today.date !== today) s.tasbeeh.today = { date: today, count: 0 };
-    s.lastVisit = new Date().toISOString();
+  Store.update(s=>{
+    const today=Utils.todayKey();
+    if(!s.history[today]) s.history[today]={total:0,morning:0,evening:0};
+    if(!s.tasbeeh.today||s.tasbeeh.today.date!==today) s.tasbeeh.today={date:today,count:0};
+    s.lastVisit=new Date().toISOString();
   });
 })();
 </script>
