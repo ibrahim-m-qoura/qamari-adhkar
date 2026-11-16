@@ -4,148 +4,83 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="theme-color" content="#0B1016" />
-<meta name="description" content="أذكار قمرية — أذكار الصباح والمساء والأذكار اليومية مع تتبع وإحصائيات وعداد تسبيح وثيمات زجاجية" />
+<meta name="description" content="أذكار قمرية — تطبيق أذكار إسلامي متكامل" />
 <title>أذكار قمرية — Qamari Adhkar</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <script>
   try {
-    const s = JSON.parse(localStorage.getItem('qamari_v1')||'{}');
+    const s = JSON.parse(localStorage.getItem('qamari_v2') || '{}');
     document.documentElement.setAttribute('data-theme', s.theme || 'moonlight');
   } catch(e){}
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-
 /* ============ الثيمات الثمانية ============ */
-/* 1. نور قمر — داكن أزرق-أخضر */
 :root, [data-theme="moonlight"]{
-  --bg:#0B1016; --bg-2:#101820;
-  --glass:rgba(255,255,255,0.06); --glass-strong:rgba(255,255,255,0.12);
-  --accent:#A1B9A3; --accent-soft:rgba(161,185,163,0.15);
-  --text:#E9EEF0; --text-2:#A0ADB5;
-  --border:rgba(255,255,255,0.12); --moon:#DCE5E8;
-  --shadow:0 8px 32px rgba(0,0,0,0.40); --shadow-lg:0 12px 48px rgba(0,0,0,0.55);
-  --glass-border:rgba(255,255,255,0.18);
-  --specular:inset 0 1px 0 rgba(255,255,255,0.25), inset 0 -1px 0 rgba(255,255,255,0.05);
-  --nav-bg:rgba(16,24,32,0.75);
-  --accent-grad:linear-gradient(135deg,#A1B9A3,#DCE5E8);
+  --bg:#0B1016;--bg-2:#101820;--glass:rgba(255,255,255,0.06);--glass-strong:rgba(255,255,255,0.12);
+  --accent:#A1B9A3;--accent-soft:rgba(161,185,163,0.15);--text:#E9EEF0;--text-2:#A0ADB5;
+  --border:rgba(255,255,255,0.12);--moon:#DCE5E8;--glass-border:rgba(255,255,255,0.18);
+  --specular:inset 0 1px 0 rgba(255,255,255,0.25);--shadow:0 8px 32px rgba(0,0,0,0.40);
+  --nav-bg:rgba(16,24,32,0.75);--accent-grad:linear-gradient(135deg,#A1B9A3,#DCE5E8);
 }
-
-/* 2. زجاج — فاتح شفاف */
 [data-theme="clear"]{
-  --bg:#EEF2F5; --bg-2:#DDE4EA;
-  --glass:rgba(255,255,255,0.50); --glass-strong:rgba(255,255,255,0.75);
-  --accent:#5B7B6A; --accent-soft:rgba(91,123,106,0.12);
-  --text:#1E2A24; --text-2:#6B7A73;
-  --border:rgba(255,255,255,0.70); --moon:#FFFFFF;
-  --shadow:0 8px 32px rgba(30,42,36,0.08); --shadow-lg:0 12px 40px rgba(30,42,36,0.12);
-  --glass-border:rgba(255,255,255,0.85);
-  --specular:inset 0 1px 0 rgba(255,255,255,0.95), inset 0 -1px 0 rgba(255,255,255,0.35);
-  --nav-bg:rgba(255,255,255,0.70);
-  --accent-grad:linear-gradient(135deg,#5B7B6A,#A8C4B4);
+  --bg:#EEF2F5;--bg-2:#DDE4EA;--glass:rgba(255,255,255,0.50);--glass-strong:rgba(255,255,255,0.75);
+  --accent:#5B7B6A;--accent-soft:rgba(91,123,106,0.12);--text:#1E2A24;--text-2:#6B7A73;
+  --border:rgba(255,255,255,0.70);--moon:#FFFFFF;--glass-border:rgba(255,255,255,0.85);
+  --specular:inset 0 1px 0 rgba(255,255,255,0.95);--shadow:0 8px 32px rgba(30,42,36,0.08);
+  --nav-bg:rgba(255,255,255,0.70);--accent-grad:linear-gradient(135deg,#5B7B6A,#A8C4B4);
 }
-
-/* 3. ليلة — بنفسجي غامق */
 [data-theme="layl"]{
-  --bg:#0C0A18; --bg-2:#151226;
-  --glass:rgba(200,180,255,0.06); --glass-strong:rgba(200,180,255,0.12);
-  --accent:#B8A0E8; --accent-soft:rgba(184,160,232,0.15);
-  --text:#EAE6F5; --text-2:#9A92B8;
-  --border:rgba(200,180,255,0.15); --moon:#D8D0F0;
-  --shadow:0 8px 40px rgba(0,0,0,0.50); --shadow-lg:0 12px 50px rgba(0,0,0,0.65);
-  --glass-border:rgba(184,160,232,0.25);
-  --specular:inset 0 1px 0 rgba(184,160,232,0.30);
-  --nav-bg:rgba(21,18,38,0.75);
-  --accent-grad:linear-gradient(135deg,#B8A0E8,#7A6BB0);
+  --bg:#0C0A18;--bg-2:#151226;--glass:rgba(200,180,255,0.06);--glass-strong:rgba(200,180,255,0.12);
+  --accent:#B8A0E8;--accent-soft:rgba(184,160,232,0.15);--text:#EAE6F5;--text-2:#9A92B8;
+  --border:rgba(200,180,255,0.15);--moon:#D8D0F0;--glass-border:rgba(184,160,232,0.25);
+  --specular:inset 0 1px 0 rgba(184,160,232,0.30);--shadow:0 8px 40px rgba(0,0,0,0.50);
+  --nav-bg:rgba(21,18,38,0.75);--accent-grad:linear-gradient(135deg,#B8A0E8,#7A6BB0);
 }
-
-/* 4. رمل — بيج دافئ */
 [data-theme="sand"]{
-  --bg:#F4EFE6; --bg-2:#E8DFD0;
-  --glass:rgba(255,245,230,0.55); --glass-strong:rgba(255,245,230,0.80);
-  --accent:#A87C4F; --accent-soft:rgba(168,124,79,0.15);
-  --text:#2E2418; --text-2:#8A7A60;
-  --border:rgba(255,245,230,0.80); --moon:#FFF5E0;
-  --shadow:0 8px 32px rgba(60,45,25,0.10); --shadow-lg:0 12px 40px rgba(60,45,25,0.15);
-  --glass-border:rgba(200,170,130,0.40);
-  --specular:inset 0 1px 0 rgba(255,255,255,0.90), inset 0 -1px 0 rgba(200,170,130,0.20);
-  --nav-bg:rgba(244,239,230,0.75);
-  --accent-grad:linear-gradient(135deg,#A87C4F,#E8C89A);
+  --bg:#F4EFE6;--bg-2:#E8DFD0;--glass:rgba(255,245,230,0.55);--glass-strong:rgba(255,245,230,0.80);
+  --accent:#A87C4F;--accent-soft:rgba(168,124,79,0.15);--text:#2E2418;--text-2:#8A7A60;
+  --border:rgba(255,245,230,0.80);--moon:#FFF5E0;--glass-border:rgba(200,170,130,0.40);
+  --specular:inset 0 1px 0 rgba(255,255,255,0.90);--shadow:0 8px 32px rgba(60,45,25,0.10);
+  --nav-bg:rgba(244,239,230,0.75);--accent-grad:linear-gradient(135deg,#A87C4F,#E8C89A);
 }
-
-/* 5. زمرد — أخضر داكن فاخر */
 [data-theme="emerald"]{
-  --bg:#08120E; --bg-2:#0F1E17;
-  --glass:rgba(140,220,180,0.06); --glass-strong:rgba(140,220,180,0.12);
-  --accent:#5FD99A; --accent-soft:rgba(95,217,154,0.15);
-  --text:#E0F0E8; --text-2:#8AA898;
-  --border:rgba(140,220,180,0.15); --moon:#B8E8D0;
-  --shadow:0 8px 32px rgba(0,0,0,0.45); --shadow-lg:0 12px 40px rgba(0,0,0,0.60);
-  --glass-border:rgba(95,217,154,0.25);
-  --specular:inset 0 1px 0 rgba(95,217,154,0.30);
-  --nav-bg:rgba(15,30,23,0.75);
-  --accent-grad:linear-gradient(135deg,#5FD99A,#2A8B5A);
+  --bg:#08120E;--bg-2:#0F1E17;--glass:rgba(140,220,180,0.06);--glass-strong:rgba(140,220,180,0.12);
+  --accent:#5FD99A;--accent-soft:rgba(95,217,154,0.15);--text:#E0F0E8;--text-2:#8AA898;
+  --border:rgba(140,220,180,0.15);--moon:#B8E8D0;--glass-border:rgba(95,217,154,0.25);
+  --specular:inset 0 1px 0 rgba(95,217,154,0.30);--shadow:0 8px 32px rgba(0,0,0,0.45);
+  --nav-bg:rgba(15,30,23,0.75);--accent-grad:linear-gradient(135deg,#5FD99A,#2A8B5A);
 }
-
-/* 6. وردة — وردي دافئ */
 [data-theme="rose"]{
-  --bg:#F8EDF0; --bg-2:#F0DEE3;
-  --glass:rgba(255,240,245,0.55); --glass-strong:rgba(255,240,245,0.80);
-  --accent:#C8708F; --accent-soft:rgba(200,112,143,0.15);
-  --text:#2E1E24; --text-2:#8A6A75;
-  --border:rgba(255,240,245,0.80); --moon:#FFF0F5;
-  --shadow:0 8px 32px rgba(80,40,55,0.10); --shadow-lg:0 12px 40px rgba(80,40,55,0.15);
-  --glass-border:rgba(220,160,180,0.40);
-  --specular:inset 0 1px 0 rgba(255,255,255,0.90), inset 0 -1px 0 rgba(220,160,180,0.20);
-  --nav-bg:rgba(248,237,240,0.75);
-  --accent-grad:linear-gradient(135deg,#C8708F,#F0B8C8);
+  --bg:#F8EDF0;--bg-2:#F0DEE3;--glass:rgba(255,240,245,0.55);--glass-strong:rgba(255,240,245,0.80);
+  --accent:#C8708F;--accent-soft:rgba(200,112,143,0.15);--text:#2E1E24;--text-2:#8A6A75;
+  --border:rgba(255,240,245,0.80);--moon:#FFF0F5;--glass-border:rgba(220,160,180,0.40);
+  --specular:inset 0 1px 0 rgba(255,255,255,0.90);--shadow:0 8px 32px rgba(80,40,55,0.10);
+  --nav-bg:rgba(248,237,240,0.75);--accent-grad:linear-gradient(135deg,#C8708F,#F0B8C8);
 }
-
-/* 7. محيط — أزرق بحري */
 [data-theme="ocean"]{
-  --bg:#061520; --bg-2:#0A2235;
-  --glass:rgba(140,200,255,0.06); --glass-strong:rgba(140,200,255,0.12);
-  --accent:#5BB8E8; --accent-soft:rgba(91,184,232,0.15);
-  --text:#E0EEF8; --text-2:#8AA8B8;
-  --border:rgba(140,200,255,0.15); --moon:#B8D8F0;
-  --shadow:0 8px 32px rgba(0,0,0,0.45); --shadow-lg:0 12px 40px rgba(0,0,0,0.60);
-  --glass-border:rgba(91,184,232,0.25);
-  --specular:inset 0 1px 0 rgba(91,184,232,0.30);
-  --nav-bg:rgba(10,34,53,0.75);
-  --accent-grad:linear-gradient(135deg,#5BB8E8,#2A6B9A);
+  --bg:#061520;--bg-2:#0A2235;--glass:rgba(140,200,255,0.06);--glass-strong:rgba(140,200,255,0.12);
+  --accent:#5BB8E8;--accent-soft:rgba(91,184,232,0.15);--text:#E0EEF8;--text-2:#8AA8B8;
+  --border:rgba(140,200,255,0.15);--moon:#B8D8F0;--glass-border:rgba(91,184,232,0.25);
+  --specular:inset 0 1px 0 rgba(91,184,232,0.30);--shadow:0 8px 32px rgba(0,0,0,0.45);
+  --nav-bg:rgba(10,34,53,0.75);--accent-grad:linear-gradient(135deg,#5BB8E8,#2A6B9A);
 }
-
-/* 8. فحم — رمادي حجري */
 [data-theme="charcoal"]{
-  --bg:#141414; --bg-2:#1E1E1E;
-  --glass:rgba(255,255,255,0.05); --glass-strong:rgba(255,255,255,0.10);
-  --accent:#B8B8B8; --accent-soft:rgba(184,184,184,0.12);
-  --text:#E8E8E8; --text-2:#999999;
-  --border:rgba(255,255,255,0.10); --moon:#D0D0D0;
-  --shadow:0 8px 32px rgba(0,0,0,0.50); --shadow-lg:0 12px 40px rgba(0,0,0,0.65);
-  --glass-border:rgba(255,255,255,0.15);
-  --specular:inset 0 1px 0 rgba(255,255,255,0.18);
-  --nav-bg:rgba(30,30,30,0.75);
-  --accent-grad:linear-gradient(135deg,#B8B8B8,#787878);
+  --bg:#141414;--bg-2:#1E1E1E;--glass:rgba(255,255,255,0.05);--glass-strong:rgba(255,255,255,0.10);
+  --accent:#B8B8B8;--accent-soft:rgba(184,184,184,0.12);--text:#E8E8E8;--text-2:#999999;
+  --border:rgba(255,255,255,0.10);--moon:#D0D0D0;--glass-border:rgba(255,255,255,0.15);
+  --specular:inset 0 1px 0 rgba(255,255,255,0.18);--shadow:0 8px 32px rgba(0,0,0,0.50);
+  --nav-bg:rgba(30,30,30,0.75);--accent-grad:linear-gradient(135deg,#B8B8B8,#787878);
 }
 
 /* ============ GLOBAL ============ */
-:root{
-  --radius:22px; --radius-sm:14px; --radius-lg:28px;
-  --font:'IBM Plex Sans Arabic',system-ui,sans-serif;
-  --t:0.3s cubic-bezier(0.4,0,0.2,1);
-}
+:root{--radius:22px;--radius-sm:14px;--radius-lg:28px;--font:'IBM Plex Sans Arabic',system-ui,sans-serif;--t:0.3s cubic-bezier(0.4,0,0.2,1);--font-size:16px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
-body{
-  font-family:var(--font); background:var(--bg); color:var(--text);
-  line-height:1.6; -webkit-font-smoothing:antialiased;
-  transition:background var(--t),color var(--t);
-  overflow-x:hidden; padding-bottom:110px;
-}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;transition:background var(--t),color var(--t);overflow-x:hidden;padding-bottom:110px;font-size:var(--font-size)}
 h1,h2,h3,h4{font-weight:600;line-height:1.3;letter-spacing:-0.01em}
-h1{font-size:1.6rem} h2{font-size:1.25rem} h3{font-size:1.05rem}
+h1{font-size:1.6rem}h2{font-size:1.25rem}h3{font-size:1.05rem}
 p{color:var(--text-2)}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 a{color:inherit;text-decoration:none}
@@ -153,38 +88,19 @@ a{color:inherit;text-decoration:none}
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-thumb{background:var(--accent-soft);border-radius:3px}
 
-/* ============ الزجاج ============ */
-.glass{
-  background:var(--glass);
-  backdrop-filter:blur(24px) saturate(180%);
-  -webkit-backdrop-filter:blur(24px) saturate(180%);
-  border:1px solid var(--glass-border);
-  border-radius:var(--radius);
-  box-shadow:var(--specular),var(--shadow);
-  transition:background var(--t),border-color var(--t),box-shadow var(--t);
-}
+.glass{background:var(--glass);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--glass-border);border-radius:var(--radius);box-shadow:var(--specular),var(--shadow);transition:background var(--t),border-color var(--t),box-shadow var(--t)}
 @supports not (backdrop-filter:blur(1px)){.glass{background:var(--glass-strong)}}
 
-/* ============ خلفية نور القمر ============ */
-.moon-bg{
-  position:fixed;inset:0;z-index:-1;overflow:hidden;
-  background:
-    radial-gradient(ellipse at 50% -20%,var(--moon) 0%,transparent 50%),
-    radial-gradient(ellipse at 80% 120%,var(--accent-soft) 0%,transparent 40%),
-    linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%);
-  pointer-events:none;transition:background var(--t);
-}
+.moon-bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:radial-gradient(ellipse at 50% -20%,var(--moon) 0%,transparent 50%),radial-gradient(ellipse at 80% 120%,var(--accent-soft) 0%,transparent 40%),linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%);pointer-events:none;transition:background var(--t)}
 .moon-glow{position:absolute;border-radius:50%;filter:blur(100px);opacity:.35;animation:float 20s ease-in-out infinite}
 .moon-glow--1{width:400px;height:400px;top:-150px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,var(--moon),transparent 70%);opacity:.22}
 .moon-glow--2{width:300px;height:300px;bottom:5%;left:-100px;background:radial-gradient(circle,var(--accent),transparent 70%);animation-delay:-7s}
 .moon-glow--3{width:250px;height:250px;bottom:20%;right:-80px;background:radial-gradient(circle,var(--moon),transparent 70%);animation-delay:-14s;opacity:.15}
 @keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(20px,-30px) scale(1.08)}}
 
-/* ============ LAYOUT ============ */
 .view{max-width:520px;margin:0 auto;padding:24px 18px 20px;animation:fadeIn .35s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-/* ============ HEADER ============ */
 .app-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
 .brand{display:flex;align-items:center;gap:10px}
 .brand-logo{width:44px;height:44px;border-radius:16px;background:var(--accent-grad);display:grid;place-items:center;font-size:1.4rem;box-shadow:0 6px 20px var(--accent-soft);position:relative;overflow:hidden}
@@ -195,9 +111,8 @@ a{color:inherit;text-decoration:none}
 .brand-name small{font-size:.7rem;color:var(--text-2);letter-spacing:.05em}
 .icon-btn{width:44px;height:44px;border-radius:16px;display:grid;place-items:center;background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:var(--specular);transition:transform var(--t)}
 .icon-btn:active{transform:scale(.92)}
-.icon-btn svg{width:20px;height:20px;stroke:var(--text);stroke-width:1.8}
+.icon-btn svg,.icon-btn .emoji{width:20px;height:20px;font-size:20px;stroke:var(--text);stroke-width:1.8}
 
-/* ============ HOME ============ */
 .greeting{margin-bottom:22px}
 .greeting h1{margin-bottom:4px}
 .greeting .sub{font-size:.88rem;color:var(--text-2)}
@@ -205,12 +120,12 @@ a{color:inherit;text-decoration:none}
 .quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .quick-card{padding:20px 18px;border-radius:var(--radius);display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden;cursor:pointer;transition:transform var(--t)}
 .quick-card:active{transform:scale(.97)}
-.quick-card .qc-icon{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent)}
-.quick-card .qc-icon svg{width:20px;height:20px;stroke:var(--accent);stroke-width:1.8}
+.quick-card .qc-icon{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);font-size:20px}
 .quick-card .qc-label{font-size:1rem;font-weight:600;color:var(--text)}
 .quick-card .qc-meta{font-size:.75rem;color:var(--text-2)}
 .section-title{display:flex;align-items:center;justify-content:space-between;margin:26px 4px 12px}
 .section-title h3{font-size:.95rem;font-weight:600;color:var(--text)}
+
 .progress-card{padding:22px 20px}
 .pc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
 .pc-head h3{font-size:1rem}
@@ -229,55 +144,52 @@ a{color:inherit;text-decoration:none}
 .legend-row .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);margin-left:6px;display:inline-block}
 .legend-row .dot.evening{background:var(--moon)}
 .legend-row strong{color:var(--text);font-weight:600}
+
 .mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
 .mini-stat{padding:14px 10px;border-radius:var(--radius-sm);text-align:center}
 .mini-stat .num{font-size:1.25rem;font-weight:700;color:var(--text)}
 .mini-stat .lbl{font-size:.7rem;color:var(--text-2);margin-top:2px}
 
-/* ============ ADHKAR ============ */
 .cat-scroll{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:16px;-webkit-overflow-scrolling:touch}
 .cat-chip{padding:8px 16px;border-radius:24px;white-space:nowrap;font-size:.8rem;transition:all var(--t);cursor:pointer;background:var(--glass);border:1px solid var(--glass-border);color:var(--text);backdrop-filter:blur(12px);display:flex;align-items:center;gap:6px}
-.cat-chip svg{width:14px;height:14px;stroke:currentColor;stroke-width:2}
 .cat-chip.active{background:var(--accent);color:#fff;border-color:transparent;box-shadow:0 4px 16px var(--accent-soft)}
+
 .adhkar-list{display:flex;flex-direction:column;gap:12px}
-.adhkar-card{padding:20px;border-radius:var(--radius-sm);cursor:pointer;user-select:none;transition:transform .15s,opacity var(--t),background var(--t)}
+.adhkar-card{padding:20px;border-radius:var(--radius-sm);cursor:pointer;user-select:none;transition:transform .15s,opacity var(--t),background var(--t);position:relative}
 .adhkar-card:active{transform:scale(.98)}
 .adhkar-card.done{opacity:.55}
 .adhkar-text{font-size:.95rem;line-height:1.9;margin-bottom:14px;color:var(--text)}
-.adhkar-footer{display:flex;align-items:center;justify-content:space-between}
+.adhkar-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
 .adhkar-source{font-size:.7rem;color:var(--text-2);background:var(--accent-soft);padding:2px 8px;border-radius:8px}
+.adhkar-grade{font-size:.65rem;color:var(--text-2);padding:2px 6px;border-radius:6px;border:1px solid var(--glass-border)}
 .adhkar-counter{font-size:.8rem;color:var(--text-2);font-variant-numeric:tabular-nums}
 .adhkar-counter strong{color:var(--accent);font-weight:700}
+.fav-btn{position:absolute;top:12px;left:12px;font-size:1.1rem;opacity:.5;transition:opacity var(--t)}
+.fav-btn.active{opacity:1}
 
-/* ============ TASBEEH ============ */
 .tasbeeh-main-btn{width:140px;height:140px;border-radius:50%;background:var(--accent-grad);border:none;color:#fff;font-size:1.6rem;font-weight:600;box-shadow:0 12px 48px var(--accent-soft),var(--specular);transition:transform .1s;margin:0 auto;display:block;cursor:pointer}
 .tasbeeh-main-btn:active{transform:scale(.94)}
 
-/* ============ SETTINGS ============ */
 .setting-row{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-radius:var(--radius-sm)}
 .toggle{width:48px;height:28px;border-radius:14px;background:var(--accent-soft);position:relative;transition:background var(--t);cursor:pointer}
 .toggle.on{background:var(--accent)}
 .toggle::after{content:"";position:absolute;top:3px;right:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform var(--t);box-shadow:0 1px 3px rgba(0,0,0,.2)}
 .toggle.on::after{transform:translateX(-20px)}
+
 .theme-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:8px}
-.theme-swatch{
-  aspect-ratio:1;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
-  font-size:.65rem;font-weight:600;text-align:center;cursor:pointer;
-  border:2px solid transparent;transition:all var(--t);position:relative;overflow:hidden;
-  padding:4px;
-}
+.theme-swatch{aspect-ratio:1;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:.65rem;font-weight:600;text-align:center;cursor:pointer;border:2px solid transparent;transition:all var(--t);position:relative;overflow:hidden;padding:4px}
 .theme-swatch.active{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
 .theme-swatch .swatch-dot{width:24px;height:24px;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.2)}
 .theme-swatch .swatch-name{font-size:.6rem;line-height:1}
 
-/* ============ BOTTOM NAV ============ */
-.bottom-nav{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);width:calc(100% - 32px);max-width:480px;padding:8px;display:flex;justify-content:space-around;align-items:center;border-radius:28px;z-index:100;background:var(--nav-bg);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--glass-border);box-shadow:var(--specular),var(--shadow-lg)}
+.bottom-nav{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);width:calc(100% - 32px);max-width:480px;padding:8px;display:flex;justify-content:space-around;align-items:center;border-radius:28px;z-index:100;background:var(--nav-bg);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border:1px solid var(--glass-border);box-shadow:var(--specular),var(--shadow)}
 .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px;border-radius:20px;color:var(--text-2);transition:all var(--t);position:relative}
-.nav-item svg{width:20px;height:20px;stroke-width:1.8;transition:stroke var(--t)}
-.nav-item span{font-size:.65rem;font-weight:500}
+.nav-item .nav-icon{font-size:20px}
+.nav-item span:last-child{font-size:.65rem;font-weight:500}
 .nav-item.is-active{color:var(--accent);background:var(--accent-soft)}
-.nav-item.is-active svg{stroke:var(--accent)}
 .nav-item:active{transform:scale(.92)}
+
+.empty-state{padding:48px 20px;text-align:center;color:var(--text-2)}
 
 @media(min-width:768px){.view{padding:32px 24px 24px}h1{font-size:1.85rem}.bottom-nav{max-width:520px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -294,183 +206,196 @@ a{color:inherit;text-decoration:none}
 <main id="view" class="view"></main>
 
 <nav class="bottom-nav" id="bottomNav" aria-label="التنقل">
-  <a href="#/home"     class="nav-item is-active" data-route="home"><i data-lucide="home"></i><span>الرئيسية</span></a>
-  <a href="#/adhkar"   class="nav-item" data-route="adhkar"><i data-lucide="book-open"></i><span>الأذكار</span></a>
-  <a href="#/tasbeeh"  class="nav-item" data-route="tasbeeh"><i data-lucide="circle-dot"></i><span>المسبحة</span></a>
-  <a href="#/settings" class="nav-item" data-route="settings"><i data-lucide="settings"></i><span>الإعدادات</span></a>
+  <a href="#/home" class="nav-item is-active" data-route="home"><span class="nav-icon">🏠</span><span>الرئيسية</span></a>
+  <a href="#/adhkar" class="nav-item" data-route="adhkar"><span class="nav-icon">📖</span><span>الأذكار</span></a>
+  <a href="#/tasbeeh" class="nav-item" data-route="tasbeeh"><span class="nav-icon">📿</span><span>المسبحة</span></a>
+  <a href="#/stats" class="nav-item" data-route="stats"><span class="nav-icon">📊</span><span>الإحصائيات</span></a>
+  <a href="#/settings" class="nav-item" data-route="settings"><span class="nav-icon">⚙️</span><span>الإعدادات</span></a>
 </nav>
-
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 
 <script>
 /* =========================================================
-   1) ADHKAR DATA
+   1) STORAGE
    ========================================================= */
-const AdhkarData = {
-  morning: [
-    { id:'m1', text:'أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ. اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ... (آية الكرسي)', count:1, source:'البخاري' },
-    { id:'m2', text:'أَصْبَحْنَا عَلَى فِطْرَةِ الْإِسْلَامِ، وَكَلِمَةِ الْإِخْلَاصِ، وَدِينِ نَبِيِّنَا مُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ، وَمِلَّةِ أَبِينَا إِبْرَاهِيمَ حَنِيفًا مُسْلِمًا وَمَا كَانَ مِنَ الْمُشْرِكِينَ.', count:1, source:'حصن المسلم 90' },
-    { id:'m3', text:'رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا.', count:3, source:'حصن المسلم 23' },
-    { id:'m4', text:'اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ.', count:1, source:'حصن المسلم 78' },
-    { id:'m5', text:'اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ... فَاغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ.', count:1, source:'البخاري 6306' },
-    { id:'m6', text:'اللَّهُمَّ فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ، عَالِمَ الْغَيْبِ وَالشَّهَادَةِ... وَأَنْ أَقْتَرِفَ عَلَى نَفْسِي سُوءًا أَوْ أَجُرَّهُ إِلَى مُسْلِمٍ.', count:1, source:'حصن المسلم 85' },
-    { id:'m7', text:'أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ... رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ.', count:1, source:'مسلم 1455' },
-    { id:'m8', text:'اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ... وَأَعُوذُ بِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي.', count:1, source:'أبو داود 3871' },
-    { id:'m9', text:'بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ.', count:3, source:'أبو داود 1457' },
-    { id:'m10', text:'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، عَدَدَ خَلْقِهِ، وَرِضَا نَفْسِهِ، وَزِنَةَ عَرْشِهِ، وَمِدَادَ كَلِمَاتِهِ.', count:3, source:'مسلم 1433' },
-    { id:'m11', text:'اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَهَ إِلَّا أَنْتَ.', count:3, source:'أبو داود 2413' },
-    { id:'m12', text:'حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ.', count:7, source:'أبو داود' },
-    { id:'m13', text:'اللَّهُمَّ إِنِّي أَصْبَحْتُ أُشْهِدُكَ، وَأُشْهِدُ حَمَلَةَ عَرْشِكَ... وَأَنَّ مُحَمَّدًا عَبْدُكَ وَرَسُولُكَ.', count:4, source:'حصن المسلم' },
-    { id:'m14', text:'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ.', count:100, source:'مسلم 2692' },
-    { id:'m15', text:'أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ.', count:100, source:'حصن المسلم' },
-    { id:'m16', text:'لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.', count:10, source:'البخاري' },
-  ],
-  evening: [
-    { id:'e1', text:'أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ. اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ... (آية الكرسي)', count:1, source:'البخاري' },
-    { id:'e2', text:'أَمْسَيْنَا عَلَى فِطْرَةِ الْإِسْلَامِ، وَكَلِمَةِ الْإِخْلَاصِ، وَدِينِ نَبِيِّنَا مُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ...', count:1, source:'حصن المسلم 90' },
-    { id:'e3', text:'رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا.', count:3, source:'حصن المسلم 23' },
-    { id:'e4', text:'اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ الْمَصِيرُ.', count:1, source:'حصن المسلم 78' },
-    { id:'e5', text:'اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ...', count:1, source:'البخاري 6306' },
-    { id:'e6', text:'أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ...', count:1, source:'مسلم 1455' },
-    { id:'e7', text:'بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ.', count:3, source:'أبو داود 1457' },
-    { id:'e8', text:'حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ.', count:7, source:'أبو داود' },
-    { id:'e9', text:'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ.', count:100, source:'مسلم 2692' },
-    { id:'e10', text:'أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ.', count:100, source:'حصن المسلم' },
-  ],
-};
-
-const AdhkarCategories = {
-  'الصباح': AdhkarData.morning,
-  'المساء': AdhkarData.evening,
-  'النوم': [
-    { id:'s1', text:'بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا.', count:1, source:'البخاري' },
-    { id:'s2', text:'اللَّهُمَّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ.', count:3, source:'أبو داود' },
-    { id:'s3', text:'سُبْحَانَ اللَّهِ (33) وَالْحَمْدُ لِلَّهِ (33) وَاللَّهُ أَكْبَرُ (34).', count:1, source:'البخاري ومسلم' },
-    { id:'s4', text:'اللَّهُمَّ أَسْلَمْتُ نَفْسِي إِلَيْكَ، وَفَوَّضْتُ أَمْرِي إِلَيْكَ... آمَنْتُ بِكِتَابِكَ الَّذِي أَنْزَلْتَ، وَبِنَبِيِّكَ الَّذِي أَرْسَلْتَ.', count:1, source:'البخاري ومسلم' },
-  ],
-  'الاستيقاظ': [
-    { id:'w1', text:'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ.', count:1, source:'البخاري' },
-  ],
-  'الصلاة': [
-    { id:'p1', text:'اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ... آتِ مُحَمَّدًا الْوَسِيلَةَ وَالْفَضِيلَةَ...', count:1, source:'البخاري' },
-    { id:'p2', text:'سُبْحَانَ رَبِّيَ الْعَظِيمِ (في الركوع).', count:3, source:'مسلم' },
-    { id:'p3', text:'سُبْحَانَ رَبِّيَ الْأَعْلَى (في السجود).', count:3, source:'مسلم' },
-  ],
-  'الطعام': [
-    { id:'f1', text:'بِسْمِ اللَّهِ.', count:1, source:'البخاري' },
-    { id:'f2', text:'الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ.', count:1, source:'أبو داود' },
-  ],
-  'السفر': [
-    { id:'t1', text:'سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ. اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى...', count:1, source:'مسلم' },
-    { id:'t2', text:'اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَذَا وَاطْوِ عَنَّا بُعْدَهُ، اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ...', count:1, source:'مسلم' },
-  ],
-  'المطر والريح': [
-    { id:'r1', text:'اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهَا، وَأَعُوذُ بِكَ مِنْ شَرِّهَا. (عند رؤية الريح)', count:1, source:'أبو داود 5099' },
-    { id:'r2', text:'اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَهَا، وَخَيْرَ مَا فِيهَا، وَخَيْرَ مَا أُرْسِلَتْ بِهِ... (عند اشتداد الريح)', count:1, source:'مسلم 899' },
-    { id:'r3', text:'اللَّهُمَّ صَيِّبًا نَافِعًا. (عند نزول المطر)', count:1, source:'البخاري' },
-    { id:'r4', text:'مُطِرْنَا بِفَضْلِ اللَّهِ وَرَحْمَتِهِ. (بعد نزول المطر)', count:1, source:'البخاري ومسلم' },
-    { id:'r5', text:'سُبْحَانَ الَّذِي يُسَبِّحُ الرَّعْدُ بِحَمْدِهِ وَالْمَلَائِكَةُ مِنْ خِيفَتِهِ. (عند سماع الرعد)', count:1, source:'مالك، صحيح الإسناد' },
-  ],
-  'دخول المنزل': [
-    { id:'h1', text:'بِسْمِ اللَّهِ وَلَجْنَا، وَبِسْمِ اللَّهِ خَرَجْنَا، وَعَلَى اللَّهِ رَبِّنَا تَوَكَّلْنَا، ثُمَّ لِيُسَلِّمْ عَلَى أَهْلِهِ.', count:1, source:'أبو داود 5096' },
-  ],
-};
-
-const AllAdhkar = {};
-Object.values(AdhkarCategories).forEach(arr => arr.forEach(d => { AllAdhkar[d.id] = d; }));
-
-/* أيقونات الفئات */
-const CategoryIcons = {
-  'الصباح':'sunrise', 'المساء':'moon', 'النوم':'bed', 'الاستيقاظ':'sun',
-  'الصلاة':'landmark', 'الطعام':'utensils', 'السفر':'plane', 'المطر والريح':'cloud-rain',
-  'دخول المنزل':'home'
-};
-
-/* =========================================================
-   2) STORE
-   ========================================================= */
-const Store = (() => {
-  const KEY = 'qamari_v1';
-  const defaultState = () => ({
-    version: 5, theme:'moonlight',
-    counters:{}, completed:{}, favorites:[], history:{},
-    tasbeeh:{sessions:[],current:0,target:33,totalAllTime:0,today:{date:'',count:0}},
-    settings:{vibration:true}, lastVisit:null, recent:[]
+const Storage = (() => {
+  const KEY = 'qamari_v2';
+  const VERSION = 2;
+  const DEFAULT = () => ({
+    version: VERSION,
+    theme: 'moonlight',
+    settings: { fontSize: 16, showTashkeel: true, vibration: true, autoAdvance: false },
+    progress: {},
+    favorites: [],
+    tasbeeh: { current: 0, target: 33, dhikr: 'سبحان الله', totalAllTime: 0, today: { date: '', count: 0 }, sessions: [] },
+    stats: { activeDays: [], daily: {} },
+    lastVisit: null
   });
+  function merge(t, s) {
+    const o = { ...t };
+    for (const k in s) {
+      if (s[k] && typeof s[k] === 'object' && !Array.isArray(s[k])) o[k] = merge(t[k] || {}, s[k]);
+      else o[k] = s[k];
+    }
+    return o;
+  }
   function read() {
     try {
       const raw = localStorage.getItem(KEY);
-      if (!raw) return defaultState();
-      return Object.assign(defaultState(), JSON.parse(raw));
-    } catch(e) { return defaultState(); }
+      if (!raw) return DEFAULT();
+      return merge(DEFAULT(), JSON.parse(raw));
+    } catch(e) { return DEFAULT(); }
   }
-  function write(state) {
-    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){}
+  function write(s) {
+    try { localStorage.setItem(KEY, JSON.stringify(s)); return true; }
+    catch(e) { console.error(e); return false; }
   }
-  function update(mutator) { const s = read(); mutator(s); write(s); return s; }
-  return { read, write, update };
+  function update(fn) { const s = read(); fn(s); write(s); return s; }
+  function exportData() {
+    const data = read();
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `qamari-backup-${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+  function importData(str) {
+    try {
+      const imp = JSON.parse(str);
+      if (!imp.version) throw new Error('ملف غير صالح');
+      write(merge(DEFAULT(), imp));
+      return { success: true };
+    } catch(e) { return { success: false, error: e.message }; }
+  }
+  function reset() { localStorage.removeItem(KEY); }
+  return { read, write, update, exportData, importData, reset };
 })();
+
+/* =========================================================
+   2) ADHKAR DATA — حصن المسلم / البخاري / مسلم
+   ========================================================= */
+const AdhkarData = {
+  morning: [
+    { id:'m_ayat', text:'أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ. اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ وَلَا يَئُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ', count:1, source:'البخاري', grade:'صحيح' },
+    { id:'m_fitrah', text:'أَصْبَحْنَا عَلَى فِطْرَةِ الْإِسْلَامِ، وَكَلِمَةِ الْإِخْلَاصِ، وَدِينِ نَبِيِّنَا مُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ، وَمِلَّةِ أَبِينَا إِبْرَاهِيمَ حَنِيفًا مُسْلِمًا وَمَا كَانَ مِنَ الْمُشْرِكِينَ.', count:1, source:'حصن المسلم 90', grade:'حسن' },
+    { id:'m_radheet', text:'رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا.', count:3, source:'حصن المسلم 23', grade:'حسن' },
+    { id:'m_bika', text:'اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ.', count:1, source:'حصن المسلم 78', grade:'صحيح' },
+    { id:'m_anta', text:'اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ لَكَ بِذَنْبِي، فَاغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ.', count:1, source:'البخاري 6306', grade:'صحيح' },
+    { id:'m_bismillah', text:'بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ.', count:3, source:'أبو داود 1457', grade:'صحيح' },
+    { id:'m_subhan100', text:'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ.', count:100, source:'مسلم 2692', grade:'صحيح' },
+    { id:'m_istighfar', text:'أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ.', count:100, source:'حصن المسلم', grade:'صحيح' }
+  ],
+  evening: [
+    { id:'e_ayat', text:'أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ. اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ مَنْ ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلَّا بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ وَلَا يَئُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ', count:1, source:'البخاري', grade:'صحيح' },
+    { id:'e_fitrah', text:'أَمْسَيْنَا عَلَى فِطْرَةِ الْإِسْلَامِ، وَكَلِمَةِ الْإِخْلَاصِ، وَدِينِ نَبِيِّنَا مُحَمَّدٍ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ، وَمِلَّةِ أَبِينَا إِبْرَاهِيمَ حَنِيفًا مُسْلِمًا وَمَا كَانَ مِنَ الْمُشْرِكِينَ.', count:1, source:'حصن المسلم 90', grade:'حسن' },
+    { id:'e_bika', text:'اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ الْمَصِيرُ.', count:1, source:'حصن المسلم 78', grade:'صحيح' },
+    { id:'e_bismillah', text:'بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ.', count:3, source:'أبو داود 1457', grade:'صحيح' },
+    { id:'e_istighfar', text:'أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ.', count:100, source:'حصن المسلم', grade:'صحيح' }
+  ],
+  sleep: [
+    { id:'s_bismika', text:'بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا.', count:1, source:'البخاري', grade:'صحيح' },
+    { id:'s_qini', text:'اللَّهُمَّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ.', count:3, source:'أبو داود', grade:'صحيح' },
+    { id:'s_tasbeeh', text:'سُبْحَانَ اللَّهِ (33) وَالْحَمْدُ لِلَّهِ (33) وَاللَّهُ أَكْبَرُ (34).', count:1, source:'البخاري ومسلم', grade:'صحيح' }
+  ],
+  wake: [
+    { id:'w_ahyamana', text:'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ.', count:1, source:'البخاري', grade:'صحيح' }
+  ],
+  afterPrayer: [
+    { id:'p_astaghfir3', text:'أَسْتَغْفِرُ اللَّهَ، أَسْتَغْفِرُ اللَّهَ، أَسْتَغْفِرُ اللَّهَ. اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ، تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ.', count:1, source:'مسلم 591', grade:'صحيح' },
+    { id:'p_subhan33', text:'سُبْحَانَ اللَّهِ.', count:33, source:'مسلم', grade:'صحيح' },
+    { id:'p_hamd33', text:'الْحَمْدُ لِلَّهِ.', count:33, source:'مسلم', grade:'صحيح' },
+    { id:'p_akbar33', text:'اللَّهُ أَكْبَرُ.', count:33, source:'مسلم', grade:'صحيح' }
+  ],
+  home: [
+    { id:'h_dukhul', text:'بِسْمِ اللَّهِ وَلَجْنَا، وَبِسْمِ اللَّهِ خَرَجْنَا، وَعَلَى اللَّهِ رَبِّنَا تَوَكَّلْنَا، ثُمَّ لِيُسَلِّمْ عَلَى أَهْلِهِ.', count:1, source:'أبو داود 5096', grade:'حسن' }
+  ],
+  mosque: [
+    { id:'ms_dukhul', text:'اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ.', count:1, source:'مسلم', grade:'صحيح' },
+    { id:'ms_khuruj', text:'اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ.', count:1, source:'مسلم', grade:'صحيح' }
+  ],
+  food: [
+    { id:'f_bismillah', text:'بِسْمِ اللَّهِ.', count:1, source:'البخاري', grade:'صحيح' },
+    { id:'f_hamd', text:'الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ.', count:1, source:'أبو داود', grade:'حسن' }
+  ],
+  travel: [
+    { id:'t_safar', text:'سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ. اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى، وَمِنَ الْعَمَلِ مَا تَرْضَى.', count:1, source:'مسلم', grade:'صحيح' }
+  ],
+  misc: [
+    { id:'x_hawqala', text:'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ.', count:1, source:'البخاري ومسلم', grade:'صحيح' }
+  ]
+};
+
+const CategoryNames = {
+  morning:'أذكار الصباح', evening:'أذكار المساء', sleep:'أذكار النوم', wake:'أذكار الاستيقاظ',
+  afterPrayer:'أذكار بعد الصلاة', home:'أذكار المنزل', mosque:'أذكار المسجد',
+  food:'أذكار الطعام', travel:'أذكار السفر', misc:'أذكار متنوعة'
+};
+const CategoryIcons = {
+  morning:'🌅', evening:'🌙', sleep:'🛏️', wake:'☀️', afterPrayer:'🕌',
+  home:'🏠', mosque:'🕌', food:'🍽️', travel:'✈️', misc:'📿'
+};
 
 /* =========================================================
    3) UTILS
    ========================================================= */
 const fmtGreg = new Intl.DateTimeFormat('ar-EG',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 let fmtHijri = null;
-try{ fmtHijri = new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura',{day:'numeric',month:'long',year:'numeric'}); }catch(e){}
+try { fmtHijri = new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura',{day:'numeric',month:'long',year:'numeric'}); } catch(e){}
 
 const Utils = {
-  greet(){ const h=new Date().getHours();
-    if(h<5)return'طاب ليلك'; if(h<12)return'صباح الخير';
-    if(h<17)return'طاب نهارك'; if(h<20)return'مساء الخير'; return'طاب مساؤك'; },
-  gregorian(){ return fmtGreg.format(new Date()); },
-  hijri(){ return fmtHijri ? fmtHijri.format(new Date()) : ''; },
-  todayKey(){ const d=new Date();
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; },
-  vibrate(ms=10){ const s=Store.read(); if(s.settings.vibration && navigator.vibrate) navigator.vibrate(ms); },
-  refreshIcons(){ if(window.lucide) lucide.createIcons(); }
+  greet() { const h = new Date().getHours();
+    if (h<5) return 'طاب ليلك'; if (h<12) return 'صباح الخير';
+    if (h<17) return 'طاب نهارك'; if (h<20) return 'مساء الخير'; return 'طاب مساؤك'; },
+  gregorian() { return fmtGreg.format(new Date()); },
+  hijri() { return fmtHijri ? fmtHijri.format(new Date()) : ''; },
+  todayKey() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; },
+  vibrate(ms=10) { const s = Storage.read(); if (s.settings.vibration && navigator.vibrate) navigator.vibrate(ms); },
+  stripTashkeel(t) { return t.replace(/[\u064B-\u065F\u0670]/g, ''); }
 };
 
 /* =========================================================
    4) THEMES
    ========================================================= */
 const THEMES = [
-  { id:'moonlight', name:'نور قمر', color:'#A1B9A3' },
-  { id:'clear',     name:'زجاج',    color:'#5B7B6A' },
-  { id:'layl',      name:'ليلة',    color:'#B8A0E8' },
-  { id:'sand',      name:'رمل',     color:'#A87C4F' },
-  { id:'emerald',   name:'زمرد',    color:'#5FD99A' },
-  { id:'rose',      name:'وردة',    color:'#C8708F' },
-  { id:'ocean',     name:'محيط',    color:'#5BB8E8' },
-  { id:'charcoal',  name:'فحم',     color:'#B8B8B8' },
+  {id:'moonlight', name:'نور القمر', color:'#A1B9A3'},
+  {id:'clear',     name:'الزجاج',   color:'#5B7B6A'},
+  {id:'layl',      name:'ليلة',     color:'#B8A0E8'},
+  {id:'sand',      name:'رمل',      color:'#A87C4F'},
+  {id:'emerald',   name:'زمرد',     color:'#5FD99A'},
+  {id:'rose',      name:'وردة',     color:'#C8708F'},
+  {id:'ocean',     name:'محيط',     color:'#5BB8E8'},
+  {id:'charcoal',  name:'فحم',      color:'#B8B8B8'}
 ];
-
 const Theme = {
-  init(){ this.apply(Store.read().theme || 'moonlight'); },
-  apply(id){
+  init() { this.apply(Storage.read().theme || 'moonlight'); },
+  apply(id) {
     document.documentElement.setAttribute('data-theme', id);
     const meta = document.querySelector('meta[name="theme-color"]');
-    if(meta){
+    if (meta) {
       const colors = {moonlight:'#0B1016',clear:'#EEF2F5',layl:'#0C0A18',sand:'#F4EFE6',emerald:'#08120E',rose:'#F8EDF0',ocean:'#061520',charcoal:'#141414'};
       meta.setAttribute('content', colors[id] || '#0B1016');
     }
   },
-  set(id){ Store.update(s=>{s.theme=id;}); this.apply(id); }
+  set(id) { Storage.update(s => { s.theme = id; }); this.apply(id); }
 };
 
 /* =========================================================
    5) HOME PAGE
    ========================================================= */
 const HomePage = {
-  render(){
-    const s=Store.read(), today=Utils.todayKey(), completed=s.completed[today]||{};
-    const mDone=AdhkarData.morning.filter(d=>completed[d.id]).length;
-    const eDone=AdhkarData.evening.filter(d=>completed[d.id]).length;
-    const mPct=Math.round(mDone/AdhkarData.morning.length*100);
-    const ePct=Math.round(eDone/AdhkarData.evening.length*100);
-    const overall=Math.round((mPct+ePct)/2);
-    const offset=251.2-(251.2*overall/100);
-    const t=s.tasbeeh;
-    const todayT=(t.today&&t.today.date===today)?t.today.count:0;
+  render() {
+    const s = Storage.read();
+    const today = Utils.todayKey();
+    const prog = s.progress[today] || {};
+    const mDone = AdhkarData.morning.filter(d => prog[d.id]?.completed).length;
+    const eDone = AdhkarData.evening.filter(d => prog[d.id]?.completed).length;
+    const mPct = Math.round(mDone / AdhkarData.morning.length * 100) || 0;
+    const ePct = Math.round(eDone / AdhkarData.evening.length * 100) || 0;
+    const overall = Math.round((mPct + ePct) / 2);
+    const offset = 251.2 - (251.2 * overall / 100);
+    const t = s.tasbeeh;
+    const todayT = (t.today && t.today.date === today) ? t.today.count : 0;
 
     return `
       <header class="app-header">
@@ -478,7 +403,7 @@ const HomePage = {
           <div class="brand-logo"><span>☾</span></div>
           <div class="brand-name"><strong>أذكار قمرية</strong><small>QAMARI ADHKAR</small></div>
         </div>
-        <button class="icon-btn" onclick="Router.go('#/settings')"><i data-lucide="settings"></i></button>
+        <button class="icon-btn" onclick="Router.go('#/settings')"><span class="emoji">⚙️</span></button>
       </header>
 
       <section class="greeting">
@@ -489,12 +414,12 @@ const HomePage = {
 
       <section class="quick-grid">
         <div class="quick-card glass" onclick="Router.go('#/adhkar/morning')">
-          <div class="qc-icon"><i data-lucide="sunrise"></i></div>
+          <div class="qc-icon">🌅</div>
           <div class="qc-label">أذكار الصباح</div>
           <div class="qc-meta">${mPct}% مكتمل</div>
         </div>
         <div class="quick-card glass" onclick="Router.go('#/adhkar/evening')">
-          <div class="qc-icon"><i data-lucide="moon"></i></div>
+          <div class="qc-icon">🌙</div>
           <div class="qc-label">أذكار المساء</div>
           <div class="qc-meta">${ePct}% مكتمل</div>
         </div>
@@ -502,7 +427,7 @@ const HomePage = {
 
       <div class="section-title"><h3>تقدم اليوم</h3></div>
       <section class="progress-card glass">
-        <div class="pc-head"><h3>إجمالي التقدم</h3><small>${mDone+eDone} ذكر</small></div>
+        <div class="pc-head"><h3>إجمالي التقدم</h3><small>${mDone + eDone} ذكر</small></div>
         <div class="ring-wrap">
           <div class="ring">
             <svg viewBox="0 0 90 90">
@@ -523,169 +448,220 @@ const HomePage = {
 
       <div class="mini-stats">
         <div class="mini-stat glass"><div class="num">${todayT}</div><div class="lbl">تسبيح اليوم</div></div>
-        <div class="mini-stat glass"><div class="num">${t.totalAllTime||0}</div><div class="lbl">إجمالي التسبيح</div></div>
-        <div class="mini-stat glass"><div class="num">${mDone+eDone}</div><div class="lbl">أذكار اليوم</div></div>
+        <div class="mini-stat glass"><div class="num">${t.totalAllTime || 0}</div><div class="lbl">إجمالي التسبيح</div></div>
+        <div class="mini-stat glass"><div class="num">${s.stats.activeDays.length}</div><div class="lbl">أيام نشطة</div></div>
       </div>
 
       <div class="section-title"><h3>المسبحة</h3></div>
       <div class="glass" style="padding:20px;display:flex;align-items:center;gap:16px;cursor:pointer" onclick="Router.go('#/tasbeeh')">
-        <div style="width:56px;height:56px;border-radius:50%;background:var(--accent-grad);display:grid;place-items:center;flex-shrink:0">
-          <i data-lucide="circle-dot" style="width:24px;height:24px;stroke:#fff;stroke-width:1.8"></i>
-        </div>
+        <div style="width:56px;height:56px;border-radius:50%;background:var(--accent-grad);display:grid;place-items:center;flex-shrink:0;font-size:24px">📿</div>
         <div style="flex:1">
           <h4 style="font-size:.95rem;margin-bottom:2px">ابدأ التسبيح</h4>
-          <small style="font-size:.75rem;color:var(--text-2)">عدّاد إلكتروني • الهدف ${t.target}</small>
+          <small style="font-size:.75rem;color:var(--text-2)">الهدف ${t.target}</small>
         </div>
-        <i data-lucide="chevron-left" style="width:18px;height:18px;stroke:var(--text-2)"></i>
+        <span style="color:var(--text-2)">‹</span>
       </div>
     `;
   },
-  mount(){},
-  refresh(){ const v=document.getElementById('view'); v.innerHTML=this.render(); this.mount(); Utils.refreshIcons(); }
+  mount() {}
 };
 
 /* =========================================================
-   6) ADHKAR PAGE (الصباح/المساء في التبويبات العلوية)
+   6) ADHKAR PAGE
    ========================================================= */
 const AdhkarPage = {
-  currentCategory: 'الصباح',
-
-  render(forceCat){
-    const s=Store.read(), today=Utils.todayKey();
-    const cat=forceCat || this.currentCategory;
-    this.currentCategory=cat;
-    const items=AdhkarCategories[cat]||[];
-    const completedToday=s.completed[today]||{};
-    const counters=s.counters||{};
+  currentCat: 'morning',
+  render(forceCat) {
+    const s = Storage.read();
+    const today = Utils.todayKey();
+    const cat = forceCat || this.currentCat;
+    this.currentCat = cat;
+    const items = AdhkarData[cat] || [];
+    const prog = s.progress[today] || {};
 
     return `
       <header class="app-header"><h1>الأذكار</h1></header>
-
       <div class="cat-scroll">
-        ${Object.keys(AdhkarCategories).map(c=>`
+        ${Object.keys(AdhkarData).map(c => `
           <button class="cat-chip ${c===cat?'active':''}" onclick="AdhkarPage.switchCat('${c}')">
-            <i data-lucide="${CategoryIcons[c]||'book'}"></i>${c}
+            ${CategoryIcons[c]} ${CategoryNames[c]}
           </button>
         `).join('')}
       </div>
-
       <div class="adhkar-list">
-        ${items.map(d=>{
-          let c=counters[d.id]; if(!c||c.date!==today) c={count:0,date:today};
-          const done=completedToday[d.id]||c.count>=d.count;
+        ${items.map(d => {
+          const p = prog[d.id] || { count: 0, completed: false };
+          const done = p.completed;
+          const isFav = s.favorites.includes(d.id);
           return `
-            <div class="adhkar-card glass ${done?'done':''}" id="card-${d.id}" onclick="AdhkarPage.increment('${d.id}',${d.count})">
-              <div class="adhkar-text">${d.text}</div>
+            <div class="adhkar-card glass ${done?'done':''}" id="card-${d.id}">
+              <button class="fav-btn ${isFav?'active':''}" onclick="event.stopPropagation(); AdhkarPage.toggleFav('${d.id}')">${isFav?'⭐':'☆'}</button>
+              <div class="adhkar-text" onclick="AdhkarPage.increment('${d.id}')">${d.text}</div>
               <div class="adhkar-footer">
-                <span class="adhkar-source">${d.source}</span>
-                <span class="adhkar-counter" id="cnt-${d.id}"><strong>${c.count}</strong> / ${d.count}</span>
+                <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+                  <span class="adhkar-source">${d.source}</span>
+                  ${d.grade ? `<span class="adhkar-grade">${d.grade}</span>` : ''}
+                </div>
+                <span class="adhkar-counter" id="cnt-${d.id}"><strong>${p.count}</strong> / ${d.count}</span>
               </div>
-            </div>`;
+            </div>
+          `;
         }).join('')}
       </div>
     `;
   },
-
-  mount(){},
-  switchCat(cat){
-    this.currentCategory=cat;
-    const v=document.getElementById('view');
-    v.innerHTML=this.render(cat); this.mount(); Utils.refreshIcons();
+  mount() {},
+  switchCat(c) { this.currentCat = c; Router.handle(); },
+  toggleFav(id) {
+    Storage.update(s => {
+      const i = s.favorites.indexOf(id);
+      if (i >= 0) s.favorites.splice(i, 1);
+      else s.favorites.push(id);
+    });
+    Router.handle();
   },
-  increment(id,target){
-    const s=Store.read(), today=Utils.todayKey();
-    if(!s.completed[today]) s.completed[today]={};
-    if(!s.counters) s.counters={};
-    let c=s.counters[id]; if(!c||c.date!==today) c={count:0,date:today};
-    c.count++; s.counters[id]=c;
-    if(c.count>=target) s.completed[today][id]=true;
-    if(!s.history[today]) s.history[today]={total:0,morning:0,evening:0};
-    const mDone=AdhkarData.morning.filter(d=>s.completed[today][d.id]).length;
-    const eDone=AdhkarData.evening.filter(d=>s.completed[today][d.id]).length;
-    s.history[today].morning=Math.round(mDone/AdhkarData.morning.length*100);
-    s.history[today].evening=Math.round(eDone/AdhkarData.evening.length*100);
-    s.history[today].total=mDone+eDone;
-    Store.write(s); Utils.vibrate(15);
-    const card=document.getElementById('card-'+id);
-    if(card){
-      const done=!!s.completed[today][id];
-      const cnt=document.getElementById('cnt-'+id);
-      if(cnt) cnt.innerHTML=`<strong>${c.count}</strong> / ${target}`;
-      if(done) card.classList.add('done');
+  increment(id) {
+    const s = Storage.read();
+    const today = Utils.todayKey();
+    const all = AdhkarData[this.currentCat] || [];
+    const item = all.find(d => d.id === id);
+    if (!item) return;
+    if (!s.progress[today]) s.progress[today] = {};
+    const p = s.progress[today][id] || { count: 0, completed: false };
+    if (p.completed) return;
+    p.count++;
+    if (p.count >= item.count) p.completed = true;
+    s.progress[today][id] = p;
+    if (!s.stats.daily[today]) s.stats.daily[today] = { completed: 0, totalReps: 0 };
+    s.stats.daily[today].totalReps++;
+    if (p.completed) s.stats.daily[today].completed++;
+    Storage.write(s);
+    Utils.vibrate(15);
+    const card = document.getElementById('card-' + id);
+    if (card) {
+      const cnt = document.getElementById('cnt-' + id);
+      if (cnt) cnt.innerHTML = `<strong>${p.count}</strong> / ${item.count}`;
+      if (p.completed) card.classList.add('done');
     }
   }
 };
 
 /* =========================================================
-   7) TASBEEH
+   7) TASBEEH PAGE
    ========================================================= */
 const TasbeehPage = {
-  render(){
-    const s=Store.read(), t=s.tasbeeh, today=Utils.todayKey();
-    const todayCount=(t.today&&t.today.date===today)?t.today.count:0;
+  render() {
+    const s = Storage.read();
+    const t = s.tasbeeh;
+    const today = Utils.todayKey();
+    const todayCount = (t.today && t.today.date === today) ? t.today.count : 0;
     return `
       <header class="app-header"><h1>المسبحة</h1></header>
-      <div class="glass" style="padding:36px 20px;text-align:center;border-radius:var(--radius-lg);margin-bottom:16px">
-        <div style="font-size:.85rem;color:var(--text-2);margin-bottom:8px">العدد الحالي</div>
-        <div id="tasbeehCount" style="font-size:4.5rem;font-weight:700;color:var(--accent);line-height:1.1">${t.current||0}</div>
+      <div class="glass" style="padding:32px 20px;text-align:center;border-radius:var(--radius-lg);margin-bottom:16px">
+        <div style="font-size:.85rem;color:var(--text-2);margin-bottom:8px">${t.dhikr}</div>
+        <div id="tasbeehCount" style="font-size:4.5rem;font-weight:700;color:var(--accent);line-height:1.1">${t.current || 0}</div>
         <div style="font-size:.8rem;color:var(--text-2);margin-bottom:24px">الهدف: ${t.target}</div>
         <button class="tasbeeh-main-btn" onclick="TasbeehPage.tap()">سبّح</button>
         <div style="display:flex;gap:10px;margin-top:24px;justify-content:center;flex-wrap:wrap">
-          <button onclick="TasbeehPage.reset()" class="icon-btn" style="width:auto;padding:0 24px;height:44px;border-radius:14px;font-size:.85rem">تصفير</button>
-          <button onclick="TasbeehPage.saveSession()" class="icon-btn" style="width:auto;padding:0 24px;height:44px;border-radius:14px;font-size:.85rem;background:var(--accent);color:#fff;border-color:transparent">حفظ الجلسة</button>
+          <button onclick="TasbeehPage.reset()" class="icon-btn" style="width:auto;padding:0 20px;height:40px;border-radius:12px;font-size:.8rem">تصفير</button>
+          <button onclick="TasbeehPage.saveSession()" class="icon-btn" style="width:auto;padding:0 20px;height:40px;border-radius:12px;font-size:.8rem;background:var(--accent);color:#fff;border-color:transparent">حفظ</button>
         </div>
       </div>
       <div class="mini-stats">
-        <div class="mini-stat glass"><div class="num">${t.totalAllTime||0}</div><div class="lbl">إجمالي التسبيح</div></div>
+        <div class="mini-stat glass"><div class="num">${t.totalAllTime || 0}</div><div class="lbl">إجمالي</div></div>
         <div class="mini-stat glass"><div class="num">${todayCount}</div><div class="lbl">اليوم</div></div>
-        <div class="mini-stat glass"><div class="num">${t.sessions?t.sessions.length:0}</div><div class="lbl">الجلسات</div></div>
-      </div>
-      <div class="section-title"><h3>آخر الجلسات</h3></div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        ${(t.sessions||[]).slice(-5).reverse().map(sess=>`
-          <div class="glass" style="padding:14px 16px;border-radius:var(--radius-sm);display:flex;justify-content:space-between">
-            <span style="font-size:.85rem">${sess.count} تسبيحة</span>
-            <small style="color:var(--text-2)">${sess.date}</small>
-          </div>`).join('')||'<p style="text-align:center;color:var(--text-2);font-size:.85rem">لا توجد جلسات بعد</p>'}
+        <div class="mini-stat glass"><div class="num">${t.sessions.length}</div><div class="lbl">جلسات</div></div>
       </div>
     `;
   },
-  mount(){},
-  tap(){
-    const s=Store.read(), t=s.tasbeeh, today=Utils.todayKey();
-    t.current=(t.current||0)+1; t.totalAllTime=(t.totalAllTime||0)+1;
-    if(!t.today||t.today.date!==today) t.today={date:today,count:0};
+  mount() {},
+  tap() {
+    const s = Storage.read();
+    const t = s.tasbeeh;
+    const today = Utils.todayKey();
+    t.current = (t.current || 0) + 1;
+    t.totalAllTime = (t.totalAllTime || 0) + 1;
+    if (!t.today || t.today.date !== today) t.today = { date: today, count: 0 };
     t.today.count++;
-    Store.write(s); Utils.vibrate(10);
-    const el=document.getElementById('tasbeehCount'); if(el) el.textContent=t.current;
-    if(t.current===t.target) Utils.vibrate([50,30,50,30,100]);
+    Storage.write(s);
+    Utils.vibrate(10);
+    const el = document.getElementById('tasbeehCount');
+    if (el) el.textContent = t.current;
+    if (t.current === t.target) Utils.vibrate([50, 30, 50, 30, 100]);
   },
-  reset(){ const s=Store.read(); s.tasbeeh.current=0; Store.write(s);
-    const el=document.getElementById('tasbeehCount'); if(el) el.textContent=0; Utils.vibrate(20); },
-  saveSession(){
-    const s=Store.read(), t=s.tasbeeh;
-    if(t.current>0){
-      t.sessions=t.sessions||[];
-      t.sessions.push({count:t.current,date:Utils.todayKey()});
-      t.current=0; Store.write(s); Utils.vibrate(30);
-      const v=document.getElementById('view'); v.innerHTML=this.render(); Utils.refreshIcons();
+  reset() {
+    if (!confirm('هل تريد تصفير العداد؟')) return;
+    Storage.update(s => { s.tasbeeh.current = 0; });
+    const el = document.getElementById('tasbeehCount');
+    if (el) el.textContent = 0;
+  },
+  saveSession() {
+    const s = Storage.read();
+    if (s.tasbeeh.current > 0) {
+      s.tasbeeh.sessions.push({ dhikr: s.tasbeeh.dhikr, count: s.tasbeeh.current, date: Utils.todayKey() });
+      s.tasbeeh.current = 0;
+      Storage.write(s);
+      Router.handle();
     }
   }
 };
 
 /* =========================================================
-   8) SETTINGS
+   8) STATS PAGE
+   ========================================================= */
+const StatsPage = {
+  render() {
+    const s = Storage.read();
+    const today = Utils.todayKey();
+    const daily = s.stats.daily;
+    const activeDays = s.stats.activeDays;
+    const todayStats = daily[today] || { completed: 0, totalReps: 0 };
+    // آخر 7 أيام
+    const week = [];
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date(); d.setDate(d.getDate() - i);
+      const k = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+      week.push({ date: k, reps: (daily[k]?.totalReps || 0) });
+    }
+    const maxReps = Math.max(...week.map(w => w.reps), 1);
+
+    return `
+      <header class="app-header"><h1>الإحصائيات</h1></header>
+      <div class="mini-stats" style="grid-template-columns:1fr 1fr;margin-bottom:16px">
+        <div class="mini-stat glass"><div class="num">${activeDays.length}</div><div class="lbl">أيام نشطة</div></div>
+        <div class="mini-stat glass"><div class="num">${s.tasbeeh.totalAllTime || 0}</div><div class="lbl">إجمالي تسبيح</div></div>
+        <div class="mini-stat glass"><div class="num">${todayStats.completed}</div><div class="lbl">أذكار اليوم</div></div>
+        <div class="mini-stat glass"><div class="num">${todayStats.totalReps}</div><div class="lbl">تكرارات اليوم</div></div>
+      </div>
+      <div class="section-title"><h3>آخر 7 أيام</h3></div>
+      <div class="glass" style="padding:20px">
+        <div style="display:flex;align-items:flex-end;gap:8px;height:120px">
+          ${week.map(w => `
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px">
+              <div style="width:100%;background:var(--accent-grad);border-radius:6px;height:${Math.max(4, (w.reps/maxReps)*100)}%;min-height:4px;transition:height .3s"></div>
+              <span style="font-size:.6rem;color:var(--text-2)">${w.date.slice(5)}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  },
+  mount() {}
+};
+
+/* =========================================================
+   9) SETTINGS PAGE
    ========================================================= */
 const SettingsPage = {
-  render(){
-    const s=Store.read();
+  render() {
+    const s = Storage.read();
     return `
       <header class="app-header"><h1>الإعدادات</h1></header>
 
       <div class="section-title"><h3>الثيمات</h3></div>
       <div class="glass" style="padding:12px">
         <div class="theme-grid">
-          ${THEMES.map(th=>`
+          ${THEMES.map(th => `
             <div class="theme-swatch ${s.theme===th.id?'active':''}" onclick="SettingsPage.setTheme('${th.id}')">
               <div class="swatch-dot" style="background:${th.color}"></div>
               <div class="swatch-name">${th.name}</div>
@@ -694,88 +670,117 @@ const SettingsPage = {
         </div>
       </div>
 
+      <div class="section-title"><h3>حجم الخط</h3></div>
+      <div class="glass" style="padding:16px;display:flex;align-items:center;gap:12px">
+        <span style="font-size:.9rem">${s.settings.fontSize}px</span>
+        <input type="range" min="14" max="22" value="${s.settings.fontSize}" oninput="SettingsPage.setFontSize(this.value)" style="flex:1" />
+      </div>
+
       <div class="section-title"><h3>الاهتزاز</h3></div>
       <div class="glass setting-row">
         <span style="font-size:.9rem">الاهتزاز عند العد</span>
-        <div class="toggle ${s.settings.vibration?'on':''}" onclick="SettingsPage.toggleVibration()"></div>
+        <div class="toggle ${s.settings.vibration?'on':''}" onclick="SettingsPage.toggle('vibration')"></div>
       </div>
 
       <div class="section-title"><h3>هدف المسبحة</h3></div>
       <div class="glass" style="padding:8px;display:flex;flex-direction:column;gap:4px">
-        ${[33,99,100].map(n=>`
+        ${[33, 99, 100].map(n => `
           <button onclick="SettingsPage.setTarget(${n})" style="padding:14px 16px;border-radius:12px;text-align:right;font-size:.9rem;background:${s.tasbeeh.target===n?'var(--accent-soft)':'transparent'};color:${s.tasbeeh.target===n?'var(--accent)':'var(--text)'}">
             ${n} تسبيحة
-          </button>`).join('')}
+          </button>
+        `).join('')}
       </div>
 
       <div class="section-title"><h3>البيانات</h3></div>
       <div class="glass" style="padding:16px;display:flex;flex-direction:column;gap:8px">
-        <button onclick="SettingsPage.exportData()" style="padding:14px;border-radius:12px;background:var(--accent-soft);color:var(--accent);font-size:.9rem">تصدير البيانات (JSON)</button>
-        <button onclick="SettingsPage.resetData()" style="padding:14px;border-radius:12px;background:rgba(200,80,80,.15);color:#c85050;font-size:.9rem">حذف كل البيانات</button>
+        <button onclick="Storage.exportData()" style="padding:14px;border-radius:12px;background:var(--accent-soft);color:var(--accent);font-size:.9rem">تصدير البيانات</button>
+        <button onclick="SettingsPage.importFile()" style="padding:14px;border-radius:12px;background:var(--accent-soft);color:var(--accent);font-size:.9rem">استيراد البيانات</button>
+        <button onclick="SettingsPage.resetAll()" style="padding:14px;border-radius:12px;background:rgba(200,80,80,.15);color:#c85050;font-size:.9rem">حذف كل البيانات</button>
       </div>
 
       <p style="text-align:center;font-size:.75rem;color:var(--text-2);margin-top:24px">
-        أذكار قمرية v1.0 — المصادر: حصن المسلم، البخاري، مسلم
+        أذكار قمرية v2.0 — المصادر: حصن المسلم، البخاري، مسلم
       </p>
     `;
   },
-  mount(){},
-  setTheme(id){ Theme.set(id); Router.handle(); },
-  toggleVibration(){ Store.update(s=>{s.settings.vibration=!s.settings.vibration;}); Router.handle(); },
-  setTarget(n){ Store.update(s=>{s.tasbeeh.target=n;}); Router.handle(); },
-  exportData(){
-    const data=JSON.stringify(Store.read(),null,2);
-    const blob=new Blob([data],{type:'application/json'});
-    const url=URL.createObjectURL(blob);
-    const a=document.createElement('a');
-    a.href=url; a.download='qamari-backup-'+Utils.todayKey()+'.json';
-    a.click(); URL.revokeObjectURL(url);
+  mount() {},
+  setTheme(id) { Theme.set(id); Router.handle(); },
+  toggle(key) { Storage.update(s => { s.settings[key] = !s.settings[key]; }); Router.handle(); },
+  setTarget(n) { Storage.update(s => { s.tasbeeh.target = n; }); Router.handle(); },
+  setFontSize(v) {
+    Storage.update(s => { s.settings.fontSize = parseInt(v); });
+    document.documentElement.style.setProperty('--font-size', v + 'px');
   },
-  resetData(){ if(confirm('هل أنت متأكد من حذف كل البيانات؟')){ localStorage.removeItem('qamari_v1'); location.reload(); } }
-};
-
-/* =========================================================
-   9) ROUTER
-   ========================================================= */
-const Router = {
-  routes:{home:HomePage,adhkar:AdhkarPage,tasbeeh:TasbeehPage,settings:SettingsPage},
-  init(){ window.addEventListener('hashchange',()=>this.handle()); this.handle(); },
-  go(hash){ location.hash=hash; },
-  handle(){
-    const hash=location.hash.replace('#/','')||'home';
-    const [route,sub]=hash.split('/');
-    const page=this.routes[route]||HomePage;
-    document.querySelectorAll('.nav-item').forEach(el=>{
-      el.classList.toggle('is-active',el.dataset.route===route);
-    });
-    const view=document.getElementById('view');
-    if(route==='adhkar'){
-      let forceCat=null;
-      if(sub==='morning') forceCat='الصباح';
-      else if(sub==='evening') forceCat='المساء';
-      view.innerHTML=AdhkarPage.render(forceCat);
-      AdhkarPage.mount();
-    } else {
-      view.innerHTML=page.render();
-      page.mount && page.mount();
+  importFile() {
+    const inp = document.createElement('input');
+    inp.type = 'file'; inp.accept = '.json';
+    inp.onchange = e => {
+      const f = e.target.files[0];
+      if (!f) return;
+      const r = new FileReader();
+      r.onload = ev => {
+        const res = Storage.importData(ev.target.result);
+        if (res.success) { alert('تم الاستيراد بنجاح'); location.reload(); }
+        else alert('فشل الاستيراد: ' + res.error);
+      };
+      r.readAsText(f);
+    };
+    inp.click();
+  },
+  resetAll() {
+    if (confirm('هل أنت متأكد من حذف كل البيانات؟')) {
+      Storage.reset();
+      location.reload();
     }
-    Utils.refreshIcons();
-    window.scrollTo({top:0,behavior:'smooth'});
   }
 };
 
 /* =========================================================
-   10) BOOTSTRAP
+   10) ROUTER
    ========================================================= */
-(function init(){
+const Router = {
+  routes: { home: HomePage, adhkar: AdhkarPage, tasbeeh: TasbeehPage, stats: StatsPage, settings: SettingsPage },
+  init() { window.addEventListener('hashchange', () => this.handle()); this.handle(); },
+  go(hash) { location.hash = hash; },
+  handle() {
+    const hash = location.hash.replace('#/', '') || 'home';
+    const [route, sub] = hash.split('/');
+    const page = this.routes[route] || HomePage;
+    document.querySelectorAll('.nav-item').forEach(el => {
+      el.classList.toggle('is-active', el.dataset.route === route);
+    });
+    const view = document.getElementById('view');
+    if (route === 'adhkar') {
+      let forceCat = null;
+      if (sub === 'morning') forceCat = 'morning';
+      else if (sub === 'evening') forceCat = 'evening';
+      view.innerHTML = AdhkarPage.render(forceCat);
+      AdhkarPage.mount();
+    } else {
+      view.innerHTML = page.render();
+      page.mount && page.mount();
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+};
+
+/* =========================================================
+   11) BOOTSTRAP
+   ========================================================= */
+(function init() {
   Theme.init();
-  Router.init();
-  Store.update(s=>{
-    const today=Utils.todayKey();
-    if(!s.history[today]) s.history[today]={total:0,morning:0,evening:0};
-    if(!s.tasbeeh.today||s.tasbeeh.today.date!==today) s.tasbeeh.today={date:today,count:0};
-    s.lastVisit=new Date().toISOString();
+  const fs = Storage.read().settings.fontSize;
+  document.documentElement.style.setProperty('--font-size', fs + 'px');
+
+  Storage.update(s => {
+    const today = Utils.todayKey();
+    if (!s.stats.daily[today]) s.stats.daily[today] = { completed: 0, totalReps: 0 };
+    if (!s.stats.activeDays.includes(today)) s.stats.activeDays.push(today);
+    if (!s.tasbeeh.today || s.tasbeeh.today.date !== today) s.tasbeeh.today = { date: today, count: 0 };
+    s.lastVisit = new Date().toISOString();
   });
+
+  Router.init();
 })();
 </script>
 </body>
